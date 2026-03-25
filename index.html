@@ -12,7 +12,7 @@ html,body{width:100%;height:100%;font-family:'Nunito',sans-serif;background:#0d0
 #bg{position:fixed;inset:0;transition:background 1.4s ease;z-index:0;background:linear-gradient(135deg,#0d0d1a,#1a1040)}
 
 /* INTRO */
-#intro{position:fixed;inset:0;background:#0d0d1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:999;transition:opacity .6s ease}
+#intro{position:fixed;inset:0;background:#0d0d1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:999;transition:opacity .6s ease;padding:0 clamp(20px,6vw,40px);text-align:center}
 #intro.fade{opacity:0;pointer-events:none}
 .intro-heart{font-size:clamp(80px,18vw,110px);animation:iHeart 2s ease forwards}
 @keyframes iHeart{0%{opacity:0;transform:scale(0) rotate(-20deg)}60%{opacity:1;transform:scale(1.15) rotate(5deg)}80%{transform:scale(.95)}100%{opacity:1;transform:scale(1)}}
@@ -90,7 +90,7 @@ html,body{width:100%;height:100%;font-family:'Nunito',sans-serif;background:#0d0
 .screen.active{opacity:1;transform:translateY(0);pointer-events:all}
 
 /* TITLE */
-#ts{justify-content:center;gap:12px;text-align:center;padding:24px 28px}
+#ts{justify-content:center;gap:12px;text-align:center;padding:24px clamp(20px, 6vw, 40px)}
 .t-icon{font-size:clamp(60px,12vw,82px);animation:bounce 2.2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(255,100,200,.75))}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 .t-head{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2rem,8vw,4rem);line-height:1.15;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff,#ff6ec7);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 4s linear infinite;cursor:pointer;user-select:none}
@@ -525,7 +525,7 @@ One hundred percent. No going back. No looking back.
 Completely. Entirely. Forever yours.`}
 ];
 
-const FINALE=`This is our story, meri jaan.
+const FINALE=`This is our story, Meri Jaan.
 
 Every chapter. Every fight. Every late night and every stupid joke and every quiet moment that felt like nothing at the time but was actually everything.
 
@@ -535,7 +535,7 @@ With me more certain of you than I have ever been certain of anything in my life
 
 You once wrote me something I have never forgotten. You told me that before you met me, you had no reason to live. That I gave you a purpose.
 
-Meri jaan.
+Meri Jaan.
 
 You gave me one too. And I did not even know I had been missing it until you walked into my life through a Genshin world one afternoon and never really left.
 
