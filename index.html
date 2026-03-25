@@ -25,11 +25,11 @@ body{padding:16px}
 @keyframes twinkle{0%,100%{opacity:.06;transform:scale(1)}50%{opacity:.8;transform:scale(1.7)}}
 
 /* THEME EMOJI RAIN */
-.temoji{position:fixed;top:-40px;z-index:2;pointer-events:none;opacity:0;animation:emojifall linear infinite;line-height:1;user-select:none}
-@keyframes emojifall{0%{opacity:0;transform:translateY(0) translateX(0) rotate(0deg)}8%{opacity:.7}50%{transform:translateY(52vh) translateX(18px) rotate(180deg)}92%{opacity:.5}100%{opacity:0;transform:translateY(112vh) translateX(-12px) rotate(360deg)}}
+.temoji{position:fixed;top:-40px;z-index:4;pointer-events:none;opacity:0;animation:emojifall linear infinite;line-height:1;user-select:none}
+@keyframes emojifall{0%{opacity:0;transform:translateY(0) translateX(0) rotate(0deg)}8%{opacity:.88}50%{transform:translateY(52vh) translateX(18px) rotate(180deg)}92%{opacity:.62}100%{opacity:0;transform:translateY(112vh) translateX(-12px) rotate(360deg)}}
 
 /* BG CATS */
-.fcat{position:fixed;z-index:3;pointer-events:none;opacity:.45}
+.fcat{position:fixed;z-index:3;pointer-events:none;opacity:.34}
 .fcat{left:0;top:0;will-change:transform}
 .fcat img{display:block;border-radius:8px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.5));width:46px;height:46px}
 
@@ -226,7 +226,7 @@ body{padding:16px}
 <div id="toast"></div>
 <button id="musicbtn" title="Drag me anywhere · Click to toggle music">🎵</button>
 
-<div id="ctxcat" title="Drag me · Tap me for a secret">
+<div id="ctxcat" title="Drag me · Tap me for squish">
   <img id="ctxcatimg" src="" alt="" onerror="this.parentElement.style.display='none'">
 </div>
 <div id="fcatlayer"></div>
@@ -242,7 +242,7 @@ body{padding:16px}
   <p class="t-ded">To my love of life, <strong>Sherry</strong><br>From the one who is forever and utterly yours</p>
   <div class="t-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💋</span></div>
   <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to The Overworld</p>
-  <p class="t-hint">✨ drag the side cat around and tap it for a secret</p>
+  <p class="t-hint">✨ drag the side cat around and tap it for squish</p>
   <button id="continuebtn"></button>
   <div class="nav-slot" id="navslot-ts"></div>
 </div>
@@ -697,6 +697,48 @@ function showToast(msg){const t=gi('toast');t.textContent=msg;t.classList.add('s
 
 function setCtxCat(url){if(!url){$ctxcat.classList.remove('visible');return;}$ctxcat.classList.remove('visible');$ctximg.src=url;$ctxcat.style.display='block';setTimeout(()=>$ctxcat.classList.add('visible'),120);}
 
+let squishCtx=null;
+function playSquishSound(){
+  try{
+    squishCtx=squishCtx||(new(window.AudioContext||window.webkitAudioContext)());
+    const t=squishCtx.currentTime;
+
+    // Squishy sponge-like plop with a soft downward pitch.
+    const o=squishCtx.createOscillator();
+    const g=squishCtx.createGain();
+    o.type='triangle';
+    o.frequency.setValueAtTime(260,t);
+    o.frequency.exponentialRampToValueAtTime(90,t+.14);
+    g.gain.setValueAtTime(.0001,t);
+    g.gain.exponentialRampToValueAtTime(.2,t+.012);
+    g.gain.exponentialRampToValueAtTime(.0001,t+.18);
+    o.connect(g);g.connect(squishCtx.destination);
+    o.start(t);o.stop(t+.19);
+
+    const b=squishCtx.createBuffer(1,Math.floor(squishCtx.sampleRate*.08),squishCtx.sampleRate);
+    const d=b.getChannelData(0);
+    for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length)*.75;
+    const n=squishCtx.createBufferSource();n.buffer=b;
+    const ng=squishCtx.createGain();ng.gain.setValueAtTime(.05,t);ng.gain.exponentialRampToValueAtTime(.0001,t+.1);
+    const lp=squishCtx.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(640,t);
+    n.connect(lp);lp.connect(ng);ng.connect(squishCtx.destination);
+    n.start(t);n.stop(t+.1);
+  }catch(_){}
+}
+function squishCtxCat(){
+  if(!$ctxcat.classList.contains('visible')||$ctxcat.classList.contains('dragging'))return;
+  playSquishSound();
+  $ctxcat.animate(
+    [
+      {transform:'translateY(0) scale(1,1)'},
+      {transform:'translateY(0) scale(.78,1.2)'},
+      {transform:'translateY(0) scale(1.1,.9)'},
+      {transform:'translateY(0) scale(1,1)'}
+    ],
+    {duration:260,easing:'cubic-bezier(.22,.82,.25,1)'}
+  );
+}
+
 function initCtxCatDrag(){
   const box=$ctxcat;
   let dragging=false,startX=0,startY=0,origLeft=0,origTop=0;
@@ -733,7 +775,7 @@ function initCtxCatDrag(){
     box.style.transition='';
     document.removeEventListener('pointermove',onMove);
     document.removeEventListener('pointerup',onUp);
-    if(!dragging)gi('eggmodal').classList.add('show');
+    if(!dragging)squishCtxCat();
     dragging=false;
   }
   box.addEventListener('pointerdown',onDown);
@@ -742,7 +784,7 @@ function initCtxCatDrag(){
 function initWanderingCats(){
   const pool=FLY_GIFS.length?FLY_GIFS:[CATS.happy,CATS.chaotic,CATS.excited];
   const movers=[];
-  const count=Math.max(9,Math.min(14,Math.floor(window.innerWidth/95)));
+  const count=window.innerWidth<700?6:8;
 
   for(let i=0;i<count;i++){
     const el=document.createElement('div');
@@ -802,7 +844,7 @@ let activeEmojis=[];
 function clearEmojis(){activeEmojis.forEach(e=>e.remove());activeEmojis=[];}
 function spawnEmojis(set){
   clearEmojis();
-  for(let i=0;i<18;i++){
+  for(let i=0;i<26;i++){
     const el=document.createElement('div');el.className='temoji';el.textContent=set[i%set.length];
     const sz=Math.random()*14+11;
     el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;animation-duration:${Math.random()*10+8}s;animation-delay:${Math.random()*14}s`;
