@@ -30,15 +30,13 @@ body{padding:16px}
 
 /* BG CATS */
 .fcat{position:fixed;z-index:3;pointer-events:none;opacity:.45}
+.fcat{left:0;top:0;will-change:transform}
 .fcat img{display:block;border-radius:8px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.5));width:46px;height:46px}
-.fc1{bottom:25%;left:-70px;animation:fa1 24s linear infinite}
-.fc2{top:15%;right:-70px;animation:fa2 30s linear 8s infinite}
-@keyframes fa1{0%{transform:translateX(0) translateY(0) rotate(-4deg)}50%{transform:translateX(54vw) translateY(-24px) rotate(3deg)}100%{transform:translateX(112vw) translateY(4px) rotate(-4deg)}}
-@keyframes fa2{0%{transform:translateX(0) translateY(0) rotate(4deg)}50%{transform:translateX(-54vw) translateY(20px) rotate(-4deg)}100%{transform:translateX(-112vw) translateY(-5px) rotate(4deg)}}
 
 /* CONTEXT CAT */
-#ctxcat{position:fixed;bottom:18px;right:18px;z-index:6;pointer-events:none;opacity:0;transform:translateY(20px) scale(.85);transition:opacity .5s,transform .5s}
-#ctxcat.visible{opacity:1;transform:translateY(0) scale(1)}
+#ctxcat{position:fixed;bottom:18px;right:18px;z-index:170;pointer-events:none;opacity:0;transform:translateY(20px) scale(.85);transition:opacity .5s,transform .5s;touch-action:none;cursor:grab}
+#ctxcat.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+#ctxcat.dragging{cursor:grabbing;transform:translateY(0) scale(1.06)}
 #ctxcat img{width:60px;height:60px;border-radius:14px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));animation:ctxbounce 2.2s ease-in-out infinite}
 @keyframes ctxbounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
 
@@ -228,14 +226,10 @@ body{padding:16px}
 <div id="toast"></div>
 <button id="musicbtn" title="Drag me anywhere · Click to toggle music">🎵</button>
 
-<div id="ctxcat">
+<div id="ctxcat" title="Drag me · Tap me for a secret">
   <img id="ctxcatimg" src="" alt="" onerror="this.parentElement.style.display='none'">
 </div>
-<div class="fcat fc1"><img src="https://media.tenor.com/CnP64S7lszwAAAAj/meme-cat-cat-meme.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
-<div class="fcat fc2"><img src="https://media.tenor.com/xXNzEkd7BYYAAAAi/yapapa-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
-<div class="fcat fc1" style="bottom:60%;animation-duration:28s;animation-delay:5s"><img src="https://media.tenor.com/0UPw9RZF_cAAAAAj/pop-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
-<div class="fcat fc2" style="top:58%;animation-duration:26s;animation-delay:3s"><img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
-<div class="fcat fc1" style="bottom:40%;animation-duration:36s;animation-delay:1s"><img src="https://media.tenor.com/2roX3uxz_68AAAAC/nyan-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
+<div id="fcatlayer"></div>
 
 <div id="pbar"><div id="pfill" style="width:0%"></div></div>
 <div id="clabel"></div>
@@ -248,7 +242,7 @@ body{padding:16px}
   <p class="t-ded">To my love of life, <strong>Sherry</strong><br>From the one who is forever and utterly yours</p>
   <div class="t-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💋</span></div>
   <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to The Overworld</p>
-  <p class="t-hint">✨ tap the title three times for a secret</p>
+  <p class="t-hint">✨ drag the side cat around and tap it for a secret</p>
   <button id="continuebtn"></button>
   <div class="nav-slot" id="navslot-ts"></div>
 </div>
@@ -325,6 +319,12 @@ const CATS={
   grumpy:'https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif',
   typing:'https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif',
 };
+const FLY_GIFS=[
+  CATS.happy,CATS.chaotic,CATS.excited,CATS.keyboard,CATS.nyan,CATS.grumpy,CATS.typing,
+  'https://media.tenor.com/CnP64S7lszwAAAAj/meme-cat-cat-meme.gif',
+  'https://media.tenor.com/xXNzEkd7BYYAAAAi/yapapa-cat.gif',
+  'https://media.tenor.com/0UPw9RZF_cAAAAAj/pop-cat.gif'
+];
 
 const THEMES=[
   ['💜','🌹','🌸','✨','💫','🎮'],
@@ -680,6 +680,7 @@ const $bg=gi('bg'),$pf=gi('pfill'),$lbl=gi('clabel');
 const $dots=gi('dots'),$bnext=gi('bnext'),$bprev=gi('bprev');
 const $ctxcat=gi('ctxcat'),$ctximg=gi('ctxcatimg');
 const $nav=gi('nav');
+const $fcatlayer=gi('fcatlayer');
 
 for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot';d.id='d'+i;$dots.appendChild(d);}
 
@@ -687,8 +688,6 @@ window.addEventListener('load',()=>{const iv=gi('intro');setTimeout(()=>{iv.clas
 const saved=parseInt(localStorage.getItem('ourStory_ch')||'0');
 if(saved>0&&saved<=TOTAL){const cb=gi('continuebtn');cb.style.display='block';cb.textContent=`Continue: Chapter ${saved}`;cb.onclick=()=>goTo(saved);}
 
-let taps=0,tapTimer=null;
-gi('tHead').addEventListener('click',()=>{taps++;clearTimeout(tapTimer);if(taps>=3){taps=0;gi('eggmodal').classList.add('show');}else tapTimer=setTimeout(()=>{taps=0;},700);});
 function closeEgg(){gi('eggmodal').classList.remove('show');}
 function eggOutside(e){if(e.target===gi('eggmodal'))closeEgg();}
 
@@ -697,6 +696,107 @@ function doFlash(){const f=gi('flash');f.classList.add('pop');setTimeout(()=>f.c
 function showToast(msg){const t=gi('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 
 function setCtxCat(url){if(!url){$ctxcat.classList.remove('visible');return;}$ctxcat.classList.remove('visible');$ctximg.src=url;$ctxcat.style.display='block';setTimeout(()=>$ctxcat.classList.add('visible'),120);}
+
+function initCtxCatDrag(){
+  const box=$ctxcat;
+  let dragging=false,startX=0,startY=0,origLeft=0,origTop=0;
+
+  function getPos(){
+    const r=box.getBoundingClientRect();
+    return{left:r.left,top:r.top};
+  }
+  function onDown(e){
+    if(!box.classList.contains('visible'))return;
+    e.preventDefault();
+    dragging=false;
+    const pos=getPos();
+    origLeft=pos.left;origTop=pos.top;
+    const pt=e.touches?e.touches[0]:e;
+    startX=pt.clientX;startY=pt.clientY;
+    box.style.transition='none';
+    box.style.left=origLeft+'px';box.style.top=origTop+'px';
+    box.style.right='auto';box.style.bottom='auto';
+    document.addEventListener('pointermove',onMove);
+    document.addEventListener('pointerup',onUp);
+  }
+  function onMove(e){
+    const pt=e.touches?e.touches[0]:e;
+    const dx=pt.clientX-startX,dy=pt.clientY-startY;
+    if(!dragging&&Math.hypot(dx,dy)>6){dragging=true;box.classList.add('dragging');}
+    if(!dragging)return;
+    const nLeft=Math.max(0,Math.min(origLeft+dx,window.innerWidth-box.offsetWidth));
+    const nTop=Math.max(0,Math.min(origTop+dy,window.innerHeight-box.offsetHeight));
+    box.style.left=nLeft+'px';box.style.top=nTop+'px';
+  }
+  function onUp(){
+    box.classList.remove('dragging');
+    box.style.transition='';
+    document.removeEventListener('pointermove',onMove);
+    document.removeEventListener('pointerup',onUp);
+    if(!dragging)gi('eggmodal').classList.add('show');
+    dragging=false;
+  }
+  box.addEventListener('pointerdown',onDown);
+}
+
+function initWanderingCats(){
+  const pool=FLY_GIFS.length?FLY_GIFS:[CATS.happy,CATS.chaotic,CATS.excited];
+  const movers=[];
+  const count=Math.max(9,Math.min(14,Math.floor(window.innerWidth/95)));
+
+  for(let i=0;i<count;i++){
+    const el=document.createElement('div');
+    el.className='fcat';
+    const img=document.createElement('img');
+    img.src=pool[i%pool.length];
+    img.alt='';
+    img.onerror=function(){this.parentElement.style.display='none';};
+    el.appendChild(img);
+    ($fcatlayer||document.body).appendChild(el);
+
+    const w=window.innerWidth>=700?56:46;
+    const x=Math.random()*(window.innerWidth-w);
+    const y=Math.random()*(window.innerHeight-w);
+    const ang=Math.random()*Math.PI*2;
+    const speed=Math.random()*.45+.35;
+    movers.push({
+      el,x,y,vx:Math.cos(ang)*speed,vy:Math.sin(ang)*speed,
+      rot:Math.random()*360,spin:(Math.random()-.5)*1.2,wobble:Math.random()*Math.PI*2
+    });
+  }
+
+  let last=performance.now();
+  function step(now){
+    const dt=Math.min(42,now-last)/16.67;
+    last=now;
+    movers.forEach(m=>{
+      const w=m.el.offsetWidth||46,h=m.el.offsetHeight||46;
+      const maxX=Math.max(0,window.innerWidth-w),maxY=Math.max(0,window.innerHeight-h);
+
+      // Random drift so they wander instead of following a straight line.
+      m.vx+=(Math.random()-.5)*0.06;
+      m.vy+=(Math.random()-.5)*0.06;
+      const sp=Math.hypot(m.vx,m.vy)||.01;
+      const target=Math.min(1.05,Math.max(.28,sp));
+      m.vx=(m.vx/sp)*target;
+      m.vy=(m.vy/sp)*target;
+
+      m.x+=m.vx*dt*1.9;
+      m.y+=m.vy*dt*1.9;
+
+      if(m.x<0){m.x=0;m.vx=Math.abs(m.vx);}
+      if(m.x>maxX){m.x=maxX;m.vx=-Math.abs(m.vx);}
+      if(m.y<0){m.y=0;m.vy=Math.abs(m.vy);}
+      if(m.y>maxY){m.y=maxY;m.vy=-Math.abs(m.vy);}
+
+      m.rot+=m.spin*dt;
+      m.wobble+=0.06*dt;
+      m.el.style.transform=`translate3d(${m.x}px,${m.y+Math.sin(m.wobble)*2.2}px,0) rotate(${m.rot}deg)`;
+    });
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
 
 let activeEmojis=[];
 function clearEmojis(){activeEmojis.forEach(e=>e.remove());activeEmojis=[];}
@@ -786,6 +886,8 @@ function startFW(){fwOn=true;spawnBurst();fwIv=setInterval(spawnBurst,650);animF
 function stopFW(){fwOn=false;clearInterval(fwIv);cancelAnimationFrame(fwR);fwX.clearRect(0,0,fwC.width,fwC.height);fwP=[];}
 
 mountNav('navslot-ts');
+initCtxCatDrag();
+initWanderingCats();
 syncUI();spawnEmojis(THEMES[0]);
 </script>
 </body>
