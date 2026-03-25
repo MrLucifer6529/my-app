@@ -87,7 +87,7 @@ body{padding:16px}
 .dot.active{background:#fff;transform:scale(1.45);box-shadow:0 0 12px rgba(255,255,255,.7)}
 
 /* SCREENS */
-.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;pointer-events:none;z-index:10}
+.screen{position:fixed;inset:0 0 calc(var(--nav-h)+14px) 0;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;pointer-events:none;z-index:10}
 .screen.active{opacity:1;transform:translateY(0);pointer-events:all}
 
 /* TITLE */
@@ -106,7 +106,7 @@ body{padding:16px}
 
 /* CHAPTER */
 #cs{justify-content:flex-start;padding-top:50px}
-.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:calc(100dvh - 50px);padding:10px clamp(20px,6vw,40px) calc(var(--nav-h)+56px);scrollbar-width:none;overscroll-behavior:contain}
+.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:100%;padding:10px clamp(20px,6vw,40px) 22px;scrollbar-width:none;overscroll-behavior:contain}
 .ch-scroll::-webkit-scrollbar{display:none}
 .ch-icon{font-size:clamp(48px,10vw,62px);filter:drop-shadow(0 0 20px rgba(255,255,255,.18));animation:popin .55s cubic-bezier(.175,.885,.32,1.275) both;flex-shrink:0}
 @keyframes popin{from{transform:scale(0) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
@@ -166,7 +166,7 @@ body{padding:16px}
 
 /* FINALE */
 #fs{justify-content:flex-start;padding-top:50px;align-items:center}
-.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:100dvh;padding:clamp(52px,8vw,70px) clamp(20px,6vw,40px) calc(var(--nav-h)+56px);scrollbar-width:none;overscroll-behavior:contain}
+.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:100%;padding:clamp(52px,8vw,70px) clamp(20px,6vw,40px) 32px;scrollbar-width:none;overscroll-behavior:contain}
 .f-scroll::-webkit-scrollbar{display:none}
 .f-icon{font-size:clamp(60px,12vw,76px);animation:bounce 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(255,200,50,.55));flex-shrink:0}
 .f-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,5.5vw,2.7rem);font-weight:700;line-height:1.2;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 3.5s linear infinite}
@@ -178,7 +178,7 @@ body{padding:16px}
   border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.28);margin-bottom:10px
 }
 .f-sign{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,2.5vw,1.18rem);color:#ffe06e;text-align:right;width:100%;opacity:.88}
-.rbtn{padding:12px 32px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;font-size:clamp(.78rem,2vw,.85rem);font-weight:700;border:1px solid rgba(255,255,255,.13);border-radius:50px;cursor:pointer;transition:all .22s}
+.rbtn{padding:12px 32px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;font-size:clamp(.78rem,2vw,.85rem);font-weight:700;border:1px solid rgba(255,255,255,.13);border-radius:50px;cursor:pointer;transition:all .22s;margin-top:2px}
 .rbtn:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);color:rgba(255,255,255,.82)}
 
 /* NAV */
@@ -280,7 +280,7 @@ body{padding:16px}
 
     <div class="f-msg"  id="fmsg"></div>
     <div class="f-sign" id="fsign"></div>
-    <button class="rbtn" onclick="goTo(0)">Read Again &nbsp;🌸</button>
+    <button class="rbtn" id="startbtn" onclick="goTo(0)">Go To Start &nbsp;🏠</button>
   </div>
 </div>
 
