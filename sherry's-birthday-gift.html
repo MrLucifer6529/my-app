@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Our Story · For Sherry 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--accent:#a96eff;--max:660px;--nav-h:76px}
+html,body{width:100%;height:100%;font-family:'Nunito',sans-serif;background:#0d0d1a;overflow:hidden;color:#fff;-webkit-font-smoothing:antialiased}
+#bg{position:fixed;inset:0;transition:background 1.4s ease;z-index:0;background:linear-gradient(135deg,#0d0d1a,#1a1040)}
+
+/* INTRO */
+#intro{position:fixed;inset:0;background:#0d0d1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:999;transition:opacity .6s ease}
+#intro.fade{opacity:0;pointer-events:none}
+.intro-heart{font-size:clamp(80px,18vw,110px);animation:iHeart 2s ease forwards}
+@keyframes iHeart{0%{opacity:0;transform:scale(0) rotate(-20deg)}60%{opacity:1;transform:scale(1.15) rotate(5deg)}80%{transform:scale(.95)}100%{opacity:1;transform:scale(1)}}
+.intro-text{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,3vw,1.4rem);color:rgba(255,255,255,.5);opacity:0;animation:iFade 1s ease .8s forwards;letter-spacing:1px}
+@keyframes iFade{to{opacity:1}}
+
+/* STARS */
+.star{position:fixed;background:#fff;border-radius:50%;animation:twinkle ease-in-out infinite;z-index:1;pointer-events:none}
+@keyframes twinkle{0%,100%{opacity:.06;transform:scale(1)}50%{opacity:.8;transform:scale(1.7)}}
+
+/* THEME EMOJI RAIN */
+.temoji{position:fixed;top:-40px;z-index:2;pointer-events:none;opacity:0;animation:emojifall linear infinite;line-height:1;user-select:none}
+@keyframes emojifall{0%{opacity:0;transform:translateY(0) translateX(0) rotate(0deg)}8%{opacity:.7}50%{transform:translateY(52vh) translateX(18px) rotate(180deg)}92%{opacity:.5}100%{opacity:0;transform:translateY(112vh) translateX(-12px) rotate(360deg)}}
+
+/* BG CATS */
+.fcat{position:fixed;z-index:3;pointer-events:none;opacity:.45}
+.fcat img{display:block;border-radius:8px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.5));width:46px;height:46px}
+.fc1{bottom:25%;left:-70px;animation:fa1 24s linear infinite}
+.fc2{top:15%;right:-70px;animation:fa2 30s linear 8s infinite}
+@keyframes fa1{0%{transform:translateX(0) translateY(0) rotate(-4deg)}50%{transform:translateX(54vw) translateY(-24px) rotate(3deg)}100%{transform:translateX(112vw) translateY(4px) rotate(-4deg)}}
+@keyframes fa2{0%{transform:translateX(0) translateY(0) rotate(4deg)}50%{transform:translateX(-54vw) translateY(20px) rotate(-4deg)}100%{transform:translateX(-112vw) translateY(-5px) rotate(4deg)}}
+
+/* CONTEXT CAT */
+#ctxcat{position:fixed;bottom:calc(var(--nav-h)+14px);right:18px;z-index:6;pointer-events:none;opacity:0;transform:translateY(20px) scale(.85);transition:opacity .5s,transform .5s}
+#ctxcat.visible{opacity:1;transform:translateY(0) scale(1)}
+#ctxcat img{width:60px;height:60px;border-radius:14px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));animation:ctxbounce 2.2s ease-in-out infinite}
+@keyframes ctxbounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+
+/* FLASH */
+#flash{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(circle at center,rgba(255,110,199,.25),transparent 70%);transition:opacity .12s ease}
+#flash.pop{opacity:1}
+
+/* EASTER EGG */
+#eggmodal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:600;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+#eggmodal.show{opacity:1;pointer-events:all}
+.eggbox{max-width:480px;width:100%;background:linear-gradient(135deg,#1a0a2e,#2d1b69);border:1.5px solid rgba(255,255,255,.15);border-radius:24px;padding:36px 28px;text-align:center;box-shadow:0 0 60px rgba(150,80,255,.45);transform:scale(.88);transition:transform .35s}
+#eggmodal.show .eggbox{transform:scale(1)}
+.egg-icon{font-size:clamp(48px,10vw,64px);margin-bottom:12px}
+.egg-head{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,3.5vw,1.4rem);color:#ffe06e;margin-bottom:18px}
+.egg-body{font-size:clamp(.85rem,2.2vw,.95rem);color:rgba(255,255,255,.84);line-height:2;margin-bottom:20px}
+.egg-sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:clamp(.9rem,2.5vw,1.05rem);margin-bottom:22px}
+.egg-close{padding:10px 28px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.18);border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;transition:all .2s}
+.egg-close:hover{background:rgba(255,255,255,.16);color:#fff}
+
+/* TOAST */
+#toast{position:fixed;bottom:calc(var(--nav-h)+16px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
+#toast.show{opacity:1}
+
+/* DRAGGABLE MUSIC BTN */
+#musicbtn{
+  position:fixed;bottom:calc(var(--nav-h)+14px);left:18px;
+  z-index:160;width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  cursor:grab;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;transition:background .22s, box-shadow .22s;
+  backdrop-filter:blur(8px);touch-action:none;user-select:none;
+  box-shadow:0 2px 12px rgba(0,0,0,.3);
+}
+#musicbtn:hover{background:rgba(255,255,255,.18);box-shadow:0 4px 18px rgba(169,110,255,.4)}
+#musicbtn.dragging{cursor:grabbing;box-shadow:0 8px 28px rgba(169,110,255,.7);transform:scale(1.12)}
+#musicbtn.playing{background:rgba(169,110,255,.25);border-color:rgba(169,110,255,.5)}
+
+/* PROGRESS */
+#pbar{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(255,255,255,.07);z-index:200}
+#pfill{height:100%;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#ff6ec7);background-size:200%;animation:pshift 4s linear infinite;transition:width .8s ease;border-radius:0 4px 4px 0;box-shadow:0 0 12px rgba(255,110,199,.6)}
+@keyframes pshift{0%{background-position:0%}100%{background-position:200%}}
+#clabel{position:fixed;top:13px;left:50%;transform:translateX(-50%);font-size:.58rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.27);z-index:200;white-space:nowrap;pointer-events:none;max-width:85vw;overflow:hidden;text-overflow:ellipsis}
+#dots{position:fixed;top:27px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:200;align-items:center;pointer-events:none}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .4s}
+.dot.done{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.dot.active{background:#fff;transform:scale(1.45);box-shadow:0 0 12px rgba(255,255,255,.7)}
+
+/* SCREENS */
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;pointer-events:none;z-index:10}
+.screen.active{opacity:1;transform:translateY(0);pointer-events:all}
+
+/* TITLE */
+#ts{justify-content:center;gap:12px;text-align:center;padding:24px 28px}
+.t-icon{font-size:clamp(60px,12vw,82px);animation:bounce 2.2s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(255,100,200,.75))}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.t-head{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2rem,8vw,4rem);line-height:1.15;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff,#ff6ec7);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 4s linear infinite;cursor:pointer;user-select:none}
+@keyframes rbow{0%{background-position:0%}100%{background-position:300%}}
+.t-ded{font-size:clamp(.9rem,2.5vw,1.08rem);color:rgba(255,255,255,.72);line-height:2;letter-spacing:.3px}
+.t-hearts{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,14px);font-size:clamp(1.2rem,4vw,1.6rem);animation:hpulse 2.5s ease-in-out infinite}
+@keyframes hpulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.t-meta{font-size:clamp(.62rem,1.5vw,.72rem);color:rgba(255,255,255,.22);letter-spacing:2px;text-transform:uppercase}
+.t-hint{font-size:.6rem;color:rgba(255,255,255,.14);letter-spacing:1px}
+#continuebtn{display:none;padding:9px 24px;background:rgba(169,110,255,.2);color:rgba(255,255,255,.7);border:1px solid rgba(169,110,255,.4);border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:700;transition:all .2s}
+#continuebtn:hover{background:rgba(169,110,255,.35);color:#fff}
+
+/* CHAPTER */
+#cs{justify-content:flex-start;padding-top:50px}
+.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:calc(100dvh - 50px);padding:10px clamp(14px,5vw,36px) calc(var(--nav-h)+20px);scrollbar-width:none;overscroll-behavior:contain}
+.ch-scroll::-webkit-scrollbar{display:none}
+.ch-icon{font-size:clamp(48px,10vw,62px);filter:drop-shadow(0 0 20px rgba(255,255,255,.18));animation:popin .55s cubic-bezier(.175,.885,.32,1.275) both;flex-shrink:0}
+@keyframes popin{from{transform:scale(0) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.ch-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.25rem,4.5vw,2.05rem);font-weight:700;color:var(--accent);line-height:1.25;text-shadow:0 0 28px color-mix(in srgb,var(--accent) 50%,transparent);padding:0 4px}
+.ch-sub{font-size:clamp(.6rem,1.6vw,.68rem);font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.24);padding:0 8px}
+.narrative{font-size:clamp(.88rem,2.3vw,1.04rem);line-height:2.1;color:rgba(255,255,255,.88);text-align:left;white-space:pre-wrap;width:100%;padding:0}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:text-bottom;margin-left:1px;animation:blink .75s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* PHOTO GALLERY */
+.gallery-label{font-size:.62rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-top:4px}
+.gallery{width:100%;overflow-x:auto;scrollbar-width:none;overscroll-behavior:contain;padding:4px 2px 8px}
+.gallery::-webkit-scrollbar{display:none}
+.gallery-track{display:flex;gap:10px;width:max-content;padding:0 2px}
+.gphoto{
+  flex-shrink:0;
+  border-radius:16px;
+  overflow:hidden;
+  border:1.5px solid rgba(255,255,255,.15);
+  box-shadow:0 4px 20px rgba(0,0,0,.45);
+  position:relative;
+  cursor:pointer;
+  transition:transform .25s,box-shadow .25s;
+}
+.gphoto:hover{transform:scale(1.04);box-shadow:0 8px 32px rgba(169,110,255,.45)}
+.gphoto img{display:block;width:130px;height:175px;object-fit:cover;object-position:top center}
+.gphoto.couple img{width:190px;height:175px;object-position:center}
+.gphoto-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  padding:18px 8px 7px;
+  font-size:.58rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.7);text-align:center;
+}
+
+/* LIGHTBOX */
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:700;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+#lightbox.show{opacity:1;pointer-events:all}
+#lightbox img{max-width:100%;max-height:90dvh;border-radius:20px;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8)}
+#lbclose{position:absolute;top:18px;right:18px;font-size:1.6rem;cursor:pointer;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+#lbclose:hover{background:rgba(255,255,255,.18);color:#fff}
+
+/* FINALE */
+#fs{justify-content:center;align-items:center}
+.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:100dvh;padding:clamp(52px,8vw,70px) clamp(18px,5vw,36px) calc(var(--nav-h)+20px);scrollbar-width:none;overscroll-behavior:contain}
+.f-scroll::-webkit-scrollbar{display:none}
+.f-icon{font-size:clamp(60px,12vw,76px);animation:bounce 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(255,200,50,.55));flex-shrink:0}
+.f-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,5.5vw,2.7rem);font-weight:700;line-height:1.2;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 3.5s linear infinite}
+.f-hearts{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,12px);font-size:clamp(1.2rem,4vw,1.5rem);animation:hpulse 2s ease-in-out infinite}
+.f-msg{font-size:clamp(.88rem,2.3vw,1.04rem);color:rgba(255,255,255,.87);line-height:2.1;text-align:left;white-space:pre-wrap;width:100%}
+.f-sign{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,2.5vw,1.18rem);color:#ffe06e;text-align:right;width:100%;opacity:.88}
+.rbtn{padding:12px 32px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;font-size:clamp(.78rem,2vw,.85rem);font-weight:700;border:1px solid rgba(255,255,255,.13);border-radius:50px;cursor:pointer;transition:all .22s}
+.rbtn:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);color:rgba(255,255,255,.82)}
+
+/* NAV */
+#nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 24px 22px;background:linear-gradient(to top,rgba(0,0,0,.96) 55%,transparent);z-index:150;min-height:var(--nav-h)}
+.nbtn{padding:clamp(10px,2vw,13px) clamp(22px,5vw,32px);font-size:clamp(.85rem,2.2vw,.93rem);font-weight:800;font-family:'Nunito',sans-serif;border:none;border-radius:50px;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.4px;white-space:nowrap}
+.nbtn:hover{transform:translateY(-3px)}
+.nbtn:active{transform:scale(.97)}
+#bprev{background:rgba(255,255,255,.08);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.13)}
+#bprev:hover{background:rgba(255,255,255,.15)}
+#bnext{background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;box-shadow:0 4px 22px rgba(169,110,255,.5);min-width:clamp(130px,35vw,158px)}
+#bnext:hover{box-shadow:0 8px 32px rgba(169,110,255,.88)}
+#bnext.skip{background:linear-gradient(135deg,#a96eff,#6ef0ff)}
+#fwc{position:fixed;inset:0;pointer-events:none;z-index:5}
+
+@media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}.gphoto img{width:160px;height:215px}.gphoto.couple img{width:230px;height:215px}}
+@media(max-width:380px){.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}}
+</style>
+</head>
+<body>
+
+<div id="bg"></div>
+<canvas id="fwc"></canvas>
+
+<div id="intro">
+  <div class="intro-heart">💜</div>
+  <div class="intro-text">A story written just for you...</div>
+</div>
+
+<!-- EASTER EGG -->
+<div id="eggmodal" onclick="eggOutside(event)">
+  <div class="eggbox">
+    <div class="egg-icon">🩵</div>
+    <div class="egg-head">A secret, just for you</div>
+    <div class="egg-body">You found it. Of course you did.<br><br>I hid this here because some things are too precious for everyone to see. This is one of them.<br><br>I love you in the quietest, most certain way I know how. No performance. No audience. Just me, completely yours.<br><br>Thank you for being the kind of person who looks for hidden things. You found all the hidden parts of me too. And you stayed.<br><br>Always. 🌹</div>
+    <div class="egg-sign">— Samy 🩵</div>
+    <button class="egg-close" onclick="closeEgg()">Close</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLB()">
+  <button id="lbclose" onclick="closeLB()">✕</button>
+  <img id="lbimg" src="" alt="">
+</div>
+
+<div id="flash"></div>
+<div id="toast"></div>
+<button id="musicbtn" title="Drag me anywhere · Click to toggle music">🎵</button>
+
+<div id="ctxcat">
+  <img id="ctxcatimg" src="" alt="" onerror="this.parentElement.style.display='none'">
+</div>
+<div class="fcat fc1"><img src="https://media.tenor.com/I7xevZpCqaYAAAAd/hapi-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
+<div class="fcat fc2"><img src="https://media.tenor.com/bfgN5bxS1QMAAAAC/yapapa-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
+
+<div id="pbar"><div id="pfill" style="width:0%"></div></div>
+<div id="clabel"></div>
+<div id="dots"></div>
+
+<!-- TITLE -->
+<div class="screen active" id="ts">
+  <div class="t-icon">🌹</div>
+  <div class="t-head" id="tHead">Our Story</div>
+  <p class="t-ded">To my love of life, <strong>Sherry</strong><br>From the one who is forever and utterly yours</p>
+  <div class="t-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💋</span></div>
+  <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to Forever</p>
+  <p class="t-hint">✨ tap the title three times for a secret</p>
+  <button id="continuebtn"></button>
+</div>
+
+<!-- CHAPTER -->
+<div class="screen" id="cs">
+  <div class="ch-scroll" id="chscroll">
+    <div class="ch-icon"   id="cicon"></div>
+    <div class="ch-title"  id="ctitle"></div>
+    <div class="ch-sub"    id="csub"></div>
+    <div class="narrative" id="cnarr"></div>
+  </div>
+</div>
+
+<!-- FINALE -->
+<div class="screen" id="fs">
+  <div class="f-scroll" id="fscroll">
+    <div class="f-icon">🎂</div>
+    <div class="f-title">Happy Birthday, Meri Jaan 💜</div>
+    <div class="f-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💖</span><span>🍒</span></div>
+
+    <!-- ═══ PHOTO GALLERY ═══ -->
+    <p class="gallery-label">🌸 Us 🌸</p>
+    <div class="gallery">
+      <div class="gallery-track" id="galleryTrack"></div>
+    </div>
+    <!-- ══════════════════════ -->
+
+    <div class="f-msg"  id="fmsg"></div>
+    <div class="f-sign" id="fsign"></div>
+    <button class="rbtn" onclick="goTo(0)">Read Again &nbsp;🌸</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <button class="nbtn" id="bprev" onclick="prev()" style="display:none">Back</button>
+  <button class="nbtn" id="bnext" onclick="next()">Start Our Story &nbsp;🌸</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  PHOTOS — replace these paths with your actual files
+//  Put your photos in a folder called "photos" next to index.html
+//  Name them exactly as below when uploading to Vercel
+// ═══════════════════════════════════════════════════════
+const PHOTOS = [
+  { src:'./photos/sherry1.jpg', caption:'Meri Jaan 🌸' },
+  { src:'./photos/sherry2.jpg', caption:'My Everything 🩵' },
+  { src:'./photos/sherry3.jpg', caption:'So Beautiful 💜' },
+  { src:'./photos/sherry4.jpg', caption:'My Whole Heart 🌹' },
+  { src:'./photos/us.jpg',      caption:'Us 💜', couple:true },
+];
+
+// ═══════════════════════════════════════════════════════
+//  CAT GIFS
+// ═══════════════════════════════════════════════════════
+const CATS={
+  excited:'https://media.tenor.com/6kPJwz8D5yoAAAAd/pop-cat.gif',
+  happy  :'https://media.tenor.com/I7xevZpCqaYAAAAd/hapi-cat.gif',
+  chaotic:'https://media.tenor.com/bfgN5bxS1QMAAAAC/yapapa-cat.gif',
+};
+
+const THEMES=[
+  ['💜','🌹','🌸','✨','💫'],
+  ['🎮','⚔️','✨','🌟','💫'],
+  ['📱','💬','💫','🌸','✉️'],
+  ['⚔️','💢','🌊','💫','🔥'],
+  ['💋','💜','🫧','🌸','💓'],
+  ['🌙','✨','🌟','💫','🌌'],
+  ['🌩️','💫','🌊','🔥','⚡'],
+  ['🎉','🎊','✨','💜','🥂'],
+  ['💥','⚡','🔥','💢','💫'],
+  ['🫀','🌸','💜','🌹','🤍'],
+  ['🌸','🌹','💐','🍒','💋'],
+  ['🎂','🎉','💜','🌹','✨','🩵'],
+];
+
+const CH=[
+{label:'Chapter 1  ·  How It All Started',title:'It Started in Teyvat',sub:'🎮  The afternoon that changed everything  🎮',icon:'🎮',accent:'#4fc3f7',bg:['#071525','#0d2d48'],cat:CATS.excited,
+text:`You were in Mondstadt that afternoon.
+
+Just a girl figuring out a new game, wandering through a world she had barely started to understand. Completely unaware of what was about to walk into her life.
+
+And then I joined your world.
+
+Out of nowhere. No plan. No reason. Just a random stranger showing up uninvited and acting like he belonged there.
+
+You probably thought nothing of it.
+
+But something in that moment quietly decided our entire future without asking either of us.
+
+That afternoon in Teyvat was the very first page of the most beautiful story I have ever been part of. And I did not even know I was stepping into it.
+
+I just joined your world.
+
+And somehow, I never left.`},
+{label:'Chapter 2  ·  The Spark',title:'Reels, Replies and Then You',sub:'📱  Finding reasons to stay  📱',icon:'📱',accent:'#ce93d8',bg:['#1a0a2e','#2a123d'],cat:CATS.happy,
+text:`Then you started sending me reels.
+
+And we both know what sending someone reels actually means. It is not random. It is finding a reason to stay in someone's notifications without making it too obvious.
+
+I replied. You replied. And then something shifted between us.
+
+What started as funny videos slowly became real conversations. Late nights. Thoughts that had nowhere else to go. The kind of talking where you look up and hours have just disappeared into nothing.
+
+I started waiting for your name to appear.
+
+I started saving things throughout my day just to send them to you. Little things that had no reason to remind me of you but did anyway.
+
+We were two strangers who were quickly running out of ways to pretend that we were just strangers.
+
+Neither of us wanted to stop.
+
+And I am so endlessly glad we did not.`},
+{label:'Chapter 3  ·  The Enemies to Lovers Arc',title:'You Hated Me and Fell Harder Every Time',sub:'🌹  You hated me but fell deeper every single time  🌹',icon:'⚔️',accent:'#80cbc4',bg:['#071a1a','#0d2d2d'],cat:CATS.chaotic,
+text:`We were supposed to be enemies, weren't we.
+
+There was friction between us. Arguments. Moments where you looked at me like you could not stand me. You pushed. I pushed back every single time.
+
+I saw the walls you had built around yourself and I did not let them stand. I gave you reality checks. I challenged things. Not to win and not to hurt you. Because I actually saw something in you underneath all the defense and I cared about it more than I was willing to admit yet.
+
+And here is the thing, meri jaan.
+
+Every time you made yourself hate me more, you fell deeper. Every argument. Every fire in your eyes. Every moment you fought me like you meant it.
+
+You were falling for me while trying so hard not to.
+
+You fell in love while pretending you had not. You fell before you had permission to. You fell the way you fall asleep. Slowly and then all at once.
+
+Every tear from those battles only pulled you closer to me. And I was falling just as hard in the opposite direction, right toward you.
+
+We were utterly each other's before either of us admitted it.`},
+{label:'Chapter 4  ·  The Confession',title:'You Made Me Surrender',sub:'💋  The most honest messy beautiful moment  💋',icon:'💬',accent:'#f48fb1',bg:['#1f0a1a','#300f25'],cat:CATS.chaotic,
+text:`You were scared I would leave.
+
+You had been let down before. And I could feel that fear living underneath every argument, every hard word, every moment you pushed me away with both hands while everything in your eyes was begging me to stay.
+
+So we fought. The kind of fight that only happens when two people love each other too much and are too afraid to just say it.
+
+There was heat. There were too many words. There was everything we had been holding back for too long finally breaking through the surface.
+
+And then right in the middle of all of it, you made me surrender.
+
+Because somewhere in that moment you finally understood something.
+
+I was not going to leave.
+
+No matter how hard you pushed. No matter how many times you tested it. No matter how many walls you put up or fires you started. I was not going anywhere.
+
+And when that finally landed inside you, when you finally believed it for real, something broke open in you that had been locked for a very long time.
+
+Tears fell from your eyes.
+
+Not from pain. Not from the fight. But from the relief of it. After years of holding everything so tightly, after years of expecting everyone to eventually disappear, after years of guarding yourself from exactly this kind of love...
+
+For the first time in years, tears fell.
+
+And I held you through every single one of them.
+
+Meri jaan. I meant every word. I still do. I always will.`},
+{label:'Chapter 5  ·  The Most Sacred Night',title:'The Moment That Built Us',sub:'🌙  The night that split everything into before and after  🌙',icon:'🌙',accent:'#b39ddb',bg:['#120a2e','#1a1040'],cat:CATS.happy,
+text:`There are moments that split a life into before and after.
+
+That was one of them.
+
+You were scared. I knew it. I could feel it in every part of you. This was not just one kind of fear. It was everything sitting on you at once. Trust. Vulnerability. The weight of letting someone this close to you.
+
+I did not rush. I did not push.
+
+I just stayed. Present. Patient. Careful with every part of you because you are the most precious thing I have ever been trusted with. All I wanted was for you to feel completely safe in my arms.
+
+And slowly the fear left you.
+
+What took its place is something I have no words big enough for. Something that is entirely ours. Something that belongs to no one else and never will.
+
+You said it made you feel beautiful.
+
+Meri jaan, you were always beautiful. That night just finally let you feel what I had been seeing all along.
+
+You trusted me with yourself completely. And I held that like the sacred thing it was.
+
+Because it was. Because you are.`},
+{label:'Chapter 6  ·  The Storm',title:'They Tried. We Stayed.',sub:'🌩️  The whole world came for us  🌩️',icon:'🌩️',accent:'#ef9a9a',bg:['#1a0808','#2e0f0f'],cat:CATS.chaotic,
+text:`Then the storm arrived.
+
+Your brother found out. Your siblings came at us hard. Everything we had quietly built together suddenly had the whole world trying to dismantle it from every side.
+
+There were nights it genuinely felt like the end. Nights where the weight of it was so heavy I did not know if we were strong enough for this.
+
+And then I did something that most people would never do.
+
+I spoke to your sisters.
+
+My Urdu was not good enough. My English kept breaking apart in the middle of sentences. I could not find the right words in either language to say what I needed to say. But I did not let that stop me.
+
+Because what I had in my heart was bigger than language.
+
+I sat with them and I told them the truth. Broken words, wrong grammar, a boy who could barely string two proper sentences together in the language they spoke. But every single thing I said came from a place so real and so certain that I think they could feel it even through all my stumbling.
+
+I told them I love you. Not to impress anyone. Not to perform something. Because it was simply true and they deserved to hear it from me directly, face to face, with whatever words I had available.
+
+Most people never do that. Most people run when things get hard. I walked toward it.
+
+Because you are worth walking toward. You have always been worth it.
+
+We held on. Not because it was easy. Because you were worth every single storm.
+
+They tried.
+
+We are still here. Still us. Still choosing each other.`},
+{label:'Chapter 7  ·  One Year and Beyond',title:'Still Here. Still Us.',sub:'🎉  One year of choosing each other  🎉',icon:'🎉',accent:'#ffe06e',bg:['#1a1500','#2e2200'],cat:CATS.happy,
+text:`They thought it was the end.
+
+Honestly, in those hardest moments, part of me did not know either.
+
+But here we are. Over a year later. Still breathing. Still choosing each other every single day.
+
+One year of waking up and thinking of you first. One year of your name being the last thing on my mind before I close my eyes. One year of picking us over and over again without hesitation.
+
+And our love?
+
+It did not just survive everything they threw at us.
+
+It grew because of it. Every attempt to break us only made it clearer how unbreakable we actually are.
+
+I used to wonder if love this certain was even real. If someone could actually become this necessary to another person.
+
+And then Allah put you in my path.
+
+Now I know.
+
+I know the answer to every question I ever had about love. And the answer is you.
+
+We made it, meri jaan. And this is only the beginning.`},
+{label:'Chapter 8  ·  World War 3 and Making Up',title:'We Fight Like the World is Ending',sub:'💥  And come back closer every single time  💥',icon:'💥',accent:'#ffab91',bg:['#1a0f0a','#2e1a10'],cat:CATS.chaotic,
+text:`Okay let me be completely honest with you.
+
+I make mistakes. You know this. The walls of every room we have ever been in know this.
+
+And when those mistakes happen, we do not have calm quiet disagreements. We go completely in. Full passion. Full volume. Absolutely zero chill.
+
+World War 3 genuinely has nothing on us when we really get going.
+
+But here is what I know about every single one of those fights.
+
+We always come back. Without fail. Without one single exception.
+
+Every tear. Every hard word. Every moment we were both furious and both scared and both loving each other underneath all of it.
+
+It only ever brought us closer. Every time we fought our way back to each other we landed somewhere deeper than before. Like the fight burned away everything surface level and left only what was real.
+
+I would take our messiest, loudest, most chaotic fight over peace with anyone else on this earth.
+
+Every single time.
+
+That is not a small thing, meri jaan. That is everything.`},
+{label:'Chapter 9  ·  A Part of Me',title:'You Are Home',sub:'🫀  My person. My shore. My everything.  🫀',icon:'🫀',accent:'#f48fb1',bg:['#1f0a18','#2e1022'],cat:CATS.happy,
+text:`You have become a part of me I do not know how to exist without.
+
+One day without talking to you and something feels wrong. Like a piece of the day is missing. Like I walked out of the house and left something important behind and cannot figure out what it is until I remember.
+
+It is just you. It is always you.
+
+Every small thing that happens in my day, I want to run to you with it. Every tiny stupid moment. Every little happiness. Every detail that would mean nothing to anyone else but means something because I want to share it with you.
+
+And through everything we have been through. Every fight. Every impossible night. Every time the world got heavy.
+
+We never disrespected each other. We never left each other alone when it actually mattered. We showed up. In the easy days and the impossible ones.
+
+That is rare. That is the kind of rare people make dua for.
+
+You are my shore, meri jaan. The place I run to when my own chaos gets too loud. The person I prayed for without knowing what I was praying for.
+
+You are home to me.
+
+And I am never leaving.`},
+{label:'Chapter 10  ·  The Most Beautiful',title:'You Ruined Everyone Else',sub:'🌸  After you, everyone else just faded  🌸',icon:'🌸',accent:'#f8bbd0',bg:['#1f0a18','#35102a'],cat:CATS.excited,
+text:`I need you to understand something.
+
+Before you, I could look around and just see people. The world was normal. Everyone was just there.
+
+After you?
+
+Everyone else faded. Completely.
+
+Not because they changed. Because I have now seen what genuinely beautiful looks like in every possible sense of that word and nothing else compares anymore. Nothing even gets close.
+
+The way you laugh when something actually gets you. The way you love so deeply even when you are trying so hard to hide it. The way you look when you are just being yourself with no performance and no walls and no filter. Completely real. Completely you.
+
+The way you write. The way you fight for the things you love. The way you cried and stayed anyway.
+
+You make me beautiful too, meri jaan. Because being loved by you does that to a person. Being chosen by you.
+
+You absolutely ruined me for anyone else.
+
+One hundred percent. No going back. No looking back.
+
+Completely. Entirely. Forever yours.`}
+];
+
+const FINALE=`This is our story, meri jaan.
+
+Every chapter. Every fight. Every late night and every stupid joke and every quiet moment that felt like nothing at the time but was actually everything.
+
+It all led here. To you. On your birthday.
+
+With me more certain of you than I have ever been certain of anything in my life.
+
+You once wrote me something I have never forgotten. You told me that before you met me, you had no reason to live. That I gave you a purpose.
+
+Meri jaan.
+
+You gave me one too. And I did not even know I had been missing it until you walked into my life through a Genshin world one afternoon and never really left.
+
+You are my calm and my chaos. My home and my greatest adventure. The person I want to call first when anything happens. The person I pray for by name.
+
+If Allah wills it, you will be mine in dunya. And I will find you again in jannah. And in every life in between if there are any. Because one life with you will never feel like enough.
+
+My gift to you today is a promise. Not a maybe and not a someday. A real promise.
+
+I will choose you every day. In the easy ones and the ones that break us a little. Without hesitation and without doubt.
+
+Happy Birthday, meri jaan.
+
+My love. My home. My naseeb. My forever.`;
+const SIGN=`Forever and utterly yours,\nSamy  🩵`;
+
+// ─── BUILD GALLERY ───
+(function(){
+  const track=document.getElementById('galleryTrack');
+  PHOTOS.forEach(p=>{
+    const div=document.createElement('div');
+    div.className='gphoto'+(p.couple?' couple':'');
+    const img=document.createElement('img');
+    img.src=p.src;img.alt=p.caption;img.loading='lazy';
+    img.onerror=function(){this.parentElement.style.display='none';};
+    const cap=document.createElement('div');
+    cap.className='gphoto-caption';cap.textContent=p.caption;
+    div.appendChild(img);div.appendChild(cap);
+    div.onclick=()=>openLB(p.src);
+    track.appendChild(div);
+  });
+})();
+
+// ─── LIGHTBOX ───
+function openLB(src){const lb=document.getElementById('lightbox');document.getElementById('lbimg').src=src;lb.classList.add('show');}
+function closeLB(){document.getElementById('lightbox').classList.remove('show');}
+
+// ─── DRAGGABLE MUSIC BUTTON ───
+(function(){
+  const btn=document.getElementById('musicbtn');
+  let dragging=false,startX,startY,origLeft,origTop;
+
+  function getPos(){
+    const r=btn.getBoundingClientRect();
+    return{left:r.left,top:r.top};
+  }
+
+  function onDown(e){
+    e.preventDefault();
+    dragging=false;
+    const pos=getPos();
+    origLeft=pos.left;origTop=pos.top;
+    const pt=e.touches?e.touches[0]:e;
+    startX=pt.clientX;startY=pt.clientY;
+    btn.style.transition='none';
+    btn.style.left=origLeft+'px';btn.style.top=origTop+'px';
+    btn.style.bottom='auto';btn.style.right='auto';
+    document.addEventListener('pointermove',onMove);
+    document.addEventListener('pointerup',onUp);
+  }
+
+  function onMove(e){
+    const pt=e.touches?e.touches[0]:e;
+    const dx=pt.clientX-startX,dy=pt.clientY-startY;
+    if(!dragging&&Math.hypot(dx,dy)>5){dragging=true;btn.classList.add('dragging');}
+    if(!dragging)return;
+    const nLeft=Math.max(0,Math.min(origLeft+dx,window.innerWidth-btn.offsetWidth));
+    const nTop=Math.max(0,Math.min(origTop+dy,window.innerHeight-btn.offsetHeight));
+    btn.style.left=nLeft+'px';btn.style.top=nTop+'px';
+  }
+
+  function onUp(){
+    btn.classList.remove('dragging');
+    btn.style.transition='';
+    document.removeEventListener('pointermove',onMove);
+    document.removeEventListener('pointerup',onUp);
+    if(!dragging)toggleMusic();
+    dragging=false;
+  }
+
+  btn.addEventListener('pointerdown',onDown);
+})();
+
+// ─── ENGINE ───
+const TOTAL=CH.length;
+let state=0,tTimer=null,tDone=false;
+const gi=id=>document.getElementById(id);
+const $bg=gi('bg'),$pf=gi('pfill'),$lbl=gi('clabel');
+const $dots=gi('dots'),$bnext=gi('bnext'),$bprev=gi('bprev');
+const $ctxcat=gi('ctxcat'),$ctximg=gi('ctxcatimg');
+
+for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot';d.id='d'+i;$dots.appendChild(d);}
+
+window.addEventListener('load',()=>{const iv=gi('intro');setTimeout(()=>{iv.classList.add('fade');setTimeout(()=>iv.remove(),650);},2400);});
+
+const saved=parseInt(localStorage.getItem('ourStory_ch')||'0');
+if(saved>0&&saved<=TOTAL){const cb=gi('continuebtn');cb.style.display='block';cb.textContent=`Continue: Chapter ${saved}`;cb.onclick=()=>goTo(saved);}
+
+let taps=0,tapTimer=null;
+gi('tHead').addEventListener('click',()=>{taps++;clearTimeout(tapTimer);if(taps>=3){taps=0;gi('eggmodal').classList.add('show');}else tapTimer=setTimeout(()=>{taps=0;},700);});
+function closeEgg(){gi('eggmodal').classList.remove('show');}
+function eggOutside(e){if(e.target===gi('eggmodal'))closeEgg();}
+
+function doFlash(){const f=gi('flash');f.classList.add('pop');setTimeout(()=>f.classList.remove('pop'),280);}
+
+function showToast(msg){const t=gi('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+
+function setCtxCat(url){if(!url){$ctxcat.classList.remove('visible');return;}$ctxcat.classList.remove('visible');$ctximg.src=url;$ctxcat.style.display='block';setTimeout(()=>$ctxcat.classList.add('visible'),120);}
+
+let activeEmojis=[];
+function clearEmojis(){activeEmojis.forEach(e=>e.remove());activeEmojis=[];}
+function spawnEmojis(set){
+  clearEmojis();
+  for(let i=0;i<18;i++){
+    const el=document.createElement('div');el.className='temoji';el.textContent=set[i%set.length];
+    const sz=Math.random()*14+11;
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;animation-duration:${Math.random()*10+8}s;animation-delay:${Math.random()*14}s`;
+    document.body.appendChild(el);activeEmojis.push(el);
+  }
+}
+
+let audioCtx=null,mGain=null,mPlaying=false;
+function initAudio(){
+  if(audioCtx)return;
+  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  mGain=audioCtx.createGain();mGain.gain.value=0;mGain.connect(audioCtx.destination);
+  [130.81,164.81,196,261.63,329.63,392].forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=f;g.gain.value=0.055-i*0.006;o.connect(g);g.connect(mGain);o.start();});
+}
+function toggleMusic(){
+  initAudio();const btn=gi('musicbtn');
+  if(!mPlaying){mGain.gain.setTargetAtTime(0.38,audioCtx.currentTime,1.8);mPlaying=true;btn.textContent='🔊';btn.classList.add('playing');showToast('Music on 🎵');}
+  else{mGain.gain.setTargetAtTime(0,audioCtx.currentTime,1.5);mPlaying=false;btn.textContent='🎵';btn.classList.remove('playing');showToast('Music off');}
+}
+
+function setScreen(id){['ts','cs','fs'].forEach(s=>gi(s).classList.remove('active'));gi(id).classList.add('active');}
+function syncUI(){
+  const pct=state===0?0:state>TOTAL?100:(state/TOTAL)*100;
+  $pf.style.width=pct+'%';
+  for(let i=0;i<TOTAL;i++){const d=gi('d'+i);if(!d)continue;d.className='dot'+(i<state?' done':'')+(i===state-1?' active':'');}
+  $bprev.style.display=state>0?'block':'none';
+  $bnext.style.display=state<=TOTAL?'block':'none';
+}
+function goTo(s){
+  state=s;if(tTimer){clearInterval(tTimer);tTimer=null;}
+  localStorage.setItem('ourStory_ch',state>TOTAL?0:state);
+  if(state===0){
+    setScreen('ts');$bg.style.background='linear-gradient(135deg,#0d0d1a,#1a1040)';
+    document.documentElement.style.setProperty('--accent','#a96eff');
+    $lbl.textContent='';$bnext.textContent='Start Our Story \u00a0🌸';$bnext.classList.remove('skip');
+    setCtxCat(null);stopFW();spawnEmojis(THEMES[0]);
+  } else if(state>=1&&state<=TOTAL){
+    const ch=CH[state-1];
+    document.documentElement.style.setProperty('--accent',ch.accent);
+    $bg.style.background=`linear-gradient(135deg,${ch.bg[0]},${ch.bg[1]})`;
+    $lbl.textContent=ch.label;
+    const ci=gi('cicon');ci.textContent=ch.icon;ci.style.animation='none';void ci.offsetWidth;ci.style.animation='';
+    gi('ctitle').textContent=ch.title;gi('csub').textContent=ch.sub;gi('chscroll').scrollTop=0;
+    setScreen('cs');setCtxCat(ch.cat);spawnEmojis(THEMES[state]);typeIt(ch.text);
+  } else {
+    gi('fmsg').textContent=FINALE;gi('fsign').textContent=SIGN;
+    $bg.style.background='linear-gradient(135deg,#0d0820,#1a0530)';
+    document.documentElement.style.setProperty('--accent','#ff6ec7');
+    $lbl.textContent='The End · A New Beginning 🌸';
+    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.happy);spawnEmojis(THEMES[11]);startFW();
+  }
+  syncUI();
+}
+function typeIt(txt){
+  tDone=false;$bnext.textContent='Skip';$bnext.classList.add('skip');
+  const el=gi('cnarr');el.innerHTML='<span class="cursor"></span>';let i=0;
+  tTimer=setInterval(()=>{
+    if(i<txt.length){el.innerHTML=esc(txt.slice(0,++i))+'<span class="cursor"></span>';gi('chscroll').scrollTop=99999;}
+    else{clearInterval(tTimer);tTimer=null;tDone=true;el.textContent=txt;$bnext.classList.remove('skip');$bnext.textContent=state>=TOTAL?'The Finale \u00a0🎂':'Next Chapter';}
+  },16);
+}
+function skipType(){if(tTimer){clearInterval(tTimer);tTimer=null;}gi('cnarr').textContent=CH[state-1].text;tDone=true;$bnext.classList.remove('skip');$bnext.textContent=state>=TOTAL?'The Finale \u00a0🎂':'Next Chapter';}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function next(){if(state===0){goTo(1);return;}if(state>=1&&state<=TOTAL&&!tDone){skipType();return;}if(state>=1&&state<TOTAL)doFlash();goTo(state+1);}
+function prev(){if(state===0)return;goTo(state>TOTAL?TOTAL:state-1);}
+
+for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2.8+.3;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${Math.random()*4+1.5}s;animation-delay:${Math.random()*5}s`;document.body.appendChild(s);}
+
+const fwC=gi('fwc'),fwX=fwC.getContext('2d');
+function rFW(){fwC.width=innerWidth;fwC.height=innerHeight;}rFW();addEventListener('resize',rFW);
+const CLR=['#ff6ec7','#ffe06e','#6ef0ff','#a96eff','#ffd1f7','#b2efff','#ffb3d1','#fffacd'];
+let fwP=[],fwOn=false,fwIv=null,fwR=null;
+class FP{constructor(x,y,c){this.x=x;this.y=y;this.c=c;const a=Math.random()*Math.PI*2,sp=Math.random()*7+2;this.vx=Math.cos(a)*sp;this.vy=Math.sin(a)*sp;this.a=1;this.r=Math.random()*3+1;}step(){this.x+=this.vx;this.y+=this.vy;this.vy+=.07;this.a-=.014;}draw(){fwX.save();fwX.globalAlpha=this.a;fwX.fillStyle=this.c;fwX.beginPath();fwX.arc(this.x,this.y,this.r,0,Math.PI*2);fwX.fill();fwX.restore();}}
+function spawnBurst(){const x=Math.random()*fwC.width,y=Math.random()*fwC.height*.6,c=CLR[~~(Math.random()*CLR.length)];for(let i=0;i<100;i++)fwP.push(new FP(x,y,c));}
+function animFW(){if(!fwOn)return;fwX.clearRect(0,0,fwC.width,fwC.height);fwP=fwP.filter(p=>p.a>0);fwP.forEach(p=>{p.step();p.draw();});fwR=requestAnimationFrame(animFW);}
+function startFW(){fwOn=true;spawnBurst();fwIv=setInterval(spawnBurst,650);animFW();}
+function stopFW(){fwOn=false;clearInterval(fwIv);cancelAnimationFrame(fwR);fwX.clearRect(0,0,fwC.width,fwC.height);fwP=[];}
+
+syncUI();spawnEmojis(THEMES[0]);
+</script>
+</body>
+</html>
