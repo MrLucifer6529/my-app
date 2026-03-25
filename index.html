@@ -37,7 +37,7 @@ body{padding:16px}
 @keyframes fa2{0%{transform:translateX(0) translateY(0) rotate(4deg)}50%{transform:translateX(-54vw) translateY(20px) rotate(-4deg)}100%{transform:translateX(-112vw) translateY(-5px) rotate(4deg)}}
 
 /* CONTEXT CAT */
-#ctxcat{position:fixed;bottom:calc(var(--nav-h)+14px);right:18px;z-index:6;pointer-events:none;opacity:0;transform:translateY(20px) scale(.85);transition:opacity .5s,transform .5s}
+#ctxcat{position:fixed;bottom:18px;right:18px;z-index:6;pointer-events:none;opacity:0;transform:translateY(20px) scale(.85);transition:opacity .5s,transform .5s}
 #ctxcat.visible{opacity:1;transform:translateY(0) scale(1)}
 #ctxcat img{width:60px;height:60px;border-radius:14px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.6));animation:ctxbounce 2.2s ease-in-out infinite}
 @keyframes ctxbounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
@@ -59,12 +59,12 @@ body{padding:16px}
 .egg-close:hover{background:rgba(255,255,255,.16);color:#fff}
 
 /* TOAST */
-#toast{position:fixed;bottom:calc(var(--nav-h)+16px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
 #toast.show{opacity:1}
 
 /* DRAGGABLE MUSIC BTN */
 #musicbtn{
-  position:fixed;bottom:calc(var(--nav-h)+14px);left:18px;
+  position:fixed;bottom:18px;left:18px;
   z-index:160;width:44px;height:44px;border-radius:50%;
   background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
   cursor:grab;display:flex;align-items:center;justify-content:center;
@@ -105,8 +105,8 @@ body{padding:16px}
 #continuebtn:hover{background:rgba(169,110,255,.35);color:#fff}
 
 /* CHAPTER */
-#cs{justify-content:flex-start;padding-top:50px;padding-bottom:calc(var(--nav-h)+14px)}
-.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:calc(100dvh - 50px - (var(--nav-h)+14px));padding:10px clamp(20px,6vw,40px) 22px;scrollbar-width:none;overscroll-behavior:contain}
+#cs{justify-content:flex-start;padding-top:50px}
+.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:calc(100dvh - 50px);padding:10px clamp(20px,6vw,40px) 24px;scrollbar-width:none;overscroll-behavior:contain}
 .ch-scroll::-webkit-scrollbar{display:none}
 .ch-icon{font-size:clamp(48px,10vw,62px);filter:drop-shadow(0 0 20px rgba(255,255,255,.18));animation:popin .55s cubic-bezier(.175,.885,.32,1.275) both;flex-shrink:0}
 @keyframes popin{from{transform:scale(0) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
@@ -165,8 +165,8 @@ body{padding:16px}
 #lbclose:hover{background:rgba(255,255,255,.18);color:#fff}
 
 /* FINALE */
-#fs{justify-content:flex-start;padding-top:50px;align-items:center;padding-bottom:calc(var(--nav-h)+14px)}
-.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:calc(100dvh - 50px - (var(--nav-h)+14px));padding:clamp(40px,7vw,56px) clamp(20px,6vw,40px) 22px;scrollbar-width:none;overscroll-behavior:contain}
+#fs{justify-content:flex-start;padding-top:50px;align-items:center}
+.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:100dvh;padding:clamp(42px,7vw,60px) clamp(20px,6vw,40px) 24px;scrollbar-width:none;overscroll-behavior:contain}
 .f-scroll::-webkit-scrollbar{display:none}
 .f-icon{font-size:clamp(60px,12vw,76px);animation:bounce 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(255,200,50,.55));flex-shrink:0}
 .f-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,5.5vw,2.7rem);font-weight:700;line-height:1.2;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 3.5s linear infinite}
@@ -182,7 +182,7 @@ body{padding:16px}
 .rbtn:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);color:rgba(255,255,255,.82)}
 
 /* NAV */
-#nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 24px 22px;background:rgba(0,0,0,.94);border-top:1px solid rgba(255,255,255,.08);box-shadow:0 -10px 26px rgba(0,0,0,.46);z-index:150;min-height:var(--nav-h)}
+#nav{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 0 0;background:transparent;border:none;box-shadow:none;z-index:20;width:100%;max-width:var(--max);margin:0 auto}
 .nbtn{padding:clamp(10px,2vw,13px) clamp(22px,5vw,32px);font-size:clamp(.85rem,2.2vw,.93rem);font-weight:800;font-family:'Nunito',sans-serif;border:none;border-radius:50px;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.4px;white-space:nowrap}
 .nbtn:hover{transform:translateY(-3px)}
 .nbtn:active{transform:scale(.97)}
@@ -192,6 +192,7 @@ body{padding:16px}
 #bnext:hover{box-shadow:0 8px 32px rgba(169,110,255,.88)}
 #bnext.skip{background:linear-gradient(135deg,#a96eff,#6ef0ff)}
 #fwc{position:fixed;inset:0;pointer-events:none;z-index:5}
+.nav-slot{width:100%;display:flex;justify-content:center}
 @media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}.gphoto img{width:160px;height:215px}.gphoto.couple img{width:230px;height:215px}}
 @media(max-width:460px){.worlds{grid-template-columns:1fr}.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}}
 </style>
@@ -249,6 +250,7 @@ body{padding:16px}
   <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to The Overworld</p>
   <p class="t-hint">✨ tap the title three times for a secret</p>
   <button id="continuebtn"></button>
+  <div class="nav-slot" id="navslot-ts"></div>
 </div>
 
 <!-- CHAPTER -->
@@ -258,6 +260,7 @@ body{padding:16px}
     <div class="ch-title"  id="ctitle"></div>
     <div class="ch-sub"    id="csub"></div>
     <div class="narrative" id="cnarr"></div>
+    <div class="nav-slot" id="navslot-cs"></div>
   </div>
 </div>
 
@@ -280,6 +283,7 @@ body{padding:16px}
 
     <div class="f-msg"  id="fmsg"></div>
     <div class="f-sign" id="fsign"></div>
+    <div class="nav-slot" id="navslot-fs"></div>
     <button class="rbtn" id="startbtn" onclick="goTo(0)">Go To Start &nbsp;🏠</button>
   </div>
 </div>
@@ -675,6 +679,7 @@ const gi=id=>document.getElementById(id);
 const $bg=gi('bg'),$pf=gi('pfill'),$lbl=gi('clabel');
 const $dots=gi('dots'),$bnext=gi('bnext'),$bprev=gi('bprev');
 const $ctxcat=gi('ctxcat'),$ctximg=gi('ctxcatimg');
+const $nav=gi('nav');
 
 for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot';d.id='d'+i;$dots.appendChild(d);}
 
@@ -719,6 +724,10 @@ function toggleMusic(){
 }
 
 function setScreen(id){['ts','cs','fs'].forEach(s=>gi(s).classList.remove('active'));gi(id).classList.add('active');}
+function mountNav(slotId){
+  const slot=gi(slotId);
+  if(slot&&$nav.parentElement!==slot)slot.appendChild($nav);
+}
 function syncUI(){
   const pct=state===0?0:state>TOTAL?100:(state/TOTAL)*100;
   $pf.style.width=pct+'%';
@@ -733,7 +742,7 @@ function goTo(s){
     setScreen('ts');$bg.style.background='linear-gradient(135deg,#0d0d1a,#1a1040)';
     document.documentElement.style.setProperty('--accent','#a96eff');
     $lbl.textContent='';$bnext.textContent='Start Our Story \u00a0🌸';$bnext.classList.remove('skip');
-    setCtxCat(null);stopFW();spawnEmojis(THEMES[0]);
+    setCtxCat(null);stopFW();spawnEmojis(THEMES[0]);mountNav('navslot-ts');
   } else if(state>=1&&state<=TOTAL){
     const ch=CH[state-1];
     document.documentElement.style.setProperty('--accent',ch.accent);
@@ -741,13 +750,13 @@ function goTo(s){
     $lbl.textContent=ch.label;
     const ci=gi('cicon');ci.textContent=ch.icon;ci.style.animation='none';void ci.offsetWidth;ci.style.animation='';
     gi('ctitle').textContent=ch.title;gi('csub').textContent=ch.sub;gi('chscroll').scrollTop=0;
-    setScreen('cs');setCtxCat(ch.cat);spawnEmojis(THEMES[state]);typeIt(ch.text);
+    setScreen('cs');setCtxCat(ch.cat);spawnEmojis(THEMES[state]);typeIt(ch.text);mountNav('navslot-cs');
   } else {
     gi('fmsg').textContent=FINALE;gi('fsign').textContent=SIGN;
     $bg.style.background='linear-gradient(135deg,#0d0820,#1a0530)';
     document.documentElement.style.setProperty('--accent','#ff6ec7');
     $lbl.textContent='The End · A New Beginning 🌸';
-    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.nyan);spawnEmojis(THEMES[11]);startFW();
+    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.nyan);spawnEmojis(THEMES[11]);startFW();mountNav('navslot-fs');
   }
   syncUI();
 }
@@ -776,6 +785,7 @@ function animFW(){if(!fwOn)return;fwX.clearRect(0,0,fwC.width,fwC.height);fwP=fw
 function startFW(){fwOn=true;spawnBurst();fwIv=setInterval(spawnBurst,650);animFW();}
 function stopFW(){fwOn=false;clearInterval(fwIv);cancelAnimationFrame(fwR);fwX.clearRect(0,0,fwC.width,fwC.height);fwP=[];}
 
+mountNav('navslot-ts');
 syncUI();spawnEmojis(THEMES[0]);
 </script>
 </body>
