@@ -9,7 +9,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--accent:#a96eff;--max:660px;--nav-h:76px}
 html,body{width:100%;height:100%;font-family:'Nunito',sans-serif;background:#0d0d1a;overflow:hidden;color:#fff;-webkit-font-smoothing:antialiased}
-body{padding:16px}
+body{padding:16px 16px calc(16px + env(safe-area-inset-bottom))}
 #bg{position:fixed;inset:0;transition:background 1.4s ease;z-index:0;background:linear-gradient(135deg,#0d0d1a,#1a1040)}
 
 /* INTRO */
@@ -27,6 +27,21 @@ body{padding:16px}
 /* THEME EMOJI RAIN */
 .temoji{position:fixed;top:-40px;z-index:4;pointer-events:none;opacity:0;animation:emojifall linear infinite;line-height:1;user-select:none}
 @keyframes emojifall{0%{opacity:0;transform:translateY(0) translateX(0) rotate(0deg)}8%{opacity:.88}50%{transform:translateY(52vh) translateX(18px) rotate(180deg)}92%{opacity:.62}100%{opacity:0;transform:translateY(112vh) translateX(-12px) rotate(360deg)}}
+
+/* FINALE FIREWORKS */
+#fireworks{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.fwburst{position:absolute;left:0;top:0;width:0;height:0}
+.fwpart{
+  position:absolute;left:0;top:0;border-radius:50%;
+  opacity:0;transform:translate(-50%,-50%) scale(.35);
+  animation:fwpop .95s cubic-bezier(.16,.7,.28,1) forwards;
+  box-shadow:0 0 8px currentColor;
+}
+@keyframes fwpop{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1)}
+}
 
 /* BG CATS */
 .fcat{position:fixed;z-index:3;pointer-events:none;opacity:.34}
@@ -145,6 +160,7 @@ body{padding:16px}
 <body>
 
 <div id="bg"></div>
+<div id="fireworks" aria-hidden="true"></div>
 
 <div id="intro">
   <div class="intro-heart">💜</div>
@@ -541,6 +557,7 @@ const SIGN=`Forever and utterly yours,\nSamy  🩵`;
 const TOTAL=CH.length;
 let state=0,tTimer=null,tDone=false;
 const LOW_POWER=((navigator.hardwareConcurrency||8)<=4)||((navigator.deviceMemory||8)<=4)||/android|iphone|ipod/i.test(navigator.userAgent);
+const REDUCED_MOTION=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const gi=id=>document.getElementById(id);
 const $bg=gi('bg'),$pf=gi('pfill'),$lbl=gi('clabel');
@@ -548,6 +565,7 @@ const $dots=gi('dots'),$bnext=gi('bnext'),$bprev=gi('bprev');
 const $ctxcat=gi('ctxcat'),$ctximg=gi('ctxcatimg');
 const $nav=gi('nav');
 const $fcatlayer=gi('fcatlayer');
+const $fireworks=gi('fireworks');
 
 for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot';d.id='d'+i;$dots.appendChild(d);}
 
@@ -703,13 +721,56 @@ let activeEmojis=[];
 function clearEmojis(){activeEmojis.forEach(e=>e.remove());activeEmojis=[];}
 function spawnEmojis(set){
   clearEmojis();
-  const count=LOW_POWER?6:12;
+  const count=LOW_POWER?7:14;
   for(let i=0;i<count;i++){
     const el=document.createElement('div');el.className='temoji';el.textContent=set[i%set.length];
     const sz=Math.random()*14+11;
-    el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;animation-duration:${Math.random()*14+12}s;animation-delay:${Math.random()*8}s`;
+    el.style.cssText=`left:${Math.random()*100}%;font-size:${sz}px;animation-duration:${Math.random()*10+10}s;animation-delay:${Math.random()*6}s`;
     document.body.appendChild(el);activeEmojis.push(el);
   }
+}
+
+const FW_COLORS=['#ffe06e','#ff6ec7','#a96eff','#6ef0ff','#8effa1','#ffd39b'];
+let fwTimer=null;
+function stopFireworks(){
+  if(fwTimer){clearInterval(fwTimer);fwTimer=null;}
+  if($fireworks)$fireworks.innerHTML='';
+}
+function burstFirework(){
+  if(!$fireworks||state<=TOTAL)return;
+  const w=window.innerWidth,h=window.innerHeight;
+  const x=(Math.random()*0.78+0.11)*w;
+  const y=(Math.random()*0.35+0.08)*h;
+  const burst=document.createElement('div');
+  burst.className='fwburst';
+  burst.style.left=x+'px';
+  burst.style.top=y+'px';
+
+  const mobile=w<700;
+  const count=LOW_POWER?(mobile?7:9):(mobile?11:15);
+  const spread=LOW_POWER?(mobile?52:66):(mobile?72:90);
+  for(let i=0;i<count;i++){
+    const p=document.createElement('span');
+    p.className='fwpart';
+    const a=Math.random()*Math.PI*2;
+    const r=spread*(Math.random()*0.55+0.58);
+    p.style.setProperty('--dx',(Math.cos(a)*r)+'px');
+    p.style.setProperty('--dy',(Math.sin(a)*r)+'px');
+    p.style.color=FW_COLORS[(i+Math.floor(Math.random()*FW_COLORS.length))%FW_COLORS.length];
+    const size=(mobile?2.2:2.8)+Math.random()*(mobile?2:2.6);
+    p.style.width=size+'px';
+    p.style.height=size+'px';
+    p.style.animationDuration=(LOW_POWER?920:990)-(Math.random()*160)+'ms';
+    burst.appendChild(p);
+  }
+
+  $fireworks.appendChild(burst);
+  setTimeout(()=>burst.remove(),1200);
+}
+function startFireworks(){
+  if(REDUCED_MOTION||!$fireworks||fwTimer)return;
+  burstFirework();
+  fwTimer=setInterval(burstFirework,LOW_POWER?1250:900);
 }
 
 let audioCtx=null,mGain=null,mPlaying=false;
@@ -741,11 +802,13 @@ function goTo(s){
   state=s;if(tTimer){clearInterval(tTimer);tTimer=null;}
   localStorage.setItem('ourStory_ch',state>TOTAL?0:state);
   if(state===0){
+    stopFireworks();
     setScreen('ts');$bg.style.background='linear-gradient(135deg,#0d0d1a,#1a1040)';
     document.documentElement.style.setProperty('--accent','#a96eff');
     $lbl.textContent='';$bnext.textContent='Start Our Story \u00a0🌸';$bnext.classList.remove('skip');
     setCtxCat(null);spawnEmojis(THEMES[0]);mountNav('navslot-ts');
   } else if(state>=1&&state<=TOTAL){
+    stopFireworks();
     const ch=CH[state-1];
     document.documentElement.style.setProperty('--accent',ch.accent);
     $bg.style.background=`linear-gradient(135deg,${ch.bg[0]},${ch.bg[1]})`;
@@ -758,7 +821,7 @@ function goTo(s){
     $bg.style.background='linear-gradient(135deg,#0d0820,#1a0530)';
     document.documentElement.style.setProperty('--accent','#ff6ec7');
     $lbl.textContent='The End · A New Beginning 🌸';
-    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.nyan);spawnEmojis(THEMES[11]);mountNav('navslot-fs');
+    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.nyan);spawnEmojis(THEMES[11]);mountNav('navslot-fs');startFireworks();
   }
   syncUI();
 }
