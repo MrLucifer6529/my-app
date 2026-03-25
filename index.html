@@ -105,8 +105,8 @@ body{padding:16px}
 #continuebtn:hover{background:rgba(169,110,255,.35);color:#fff}
 
 /* CHAPTER */
-#cs{justify-content:flex-start;padding-top:50px}
-.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:calc(100dvh - 50px);padding:10px clamp(20px,6vw,40px) calc(var(--nav-h)+84px);scrollbar-width:none;overscroll-behavior:contain}
+#cs{justify-content:flex-start;padding-top:50px;padding-bottom:calc(var(--nav-h)+14px)}
+.ch-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;overflow-y:auto;height:calc(100dvh - 50px - (var(--nav-h)+14px));padding:10px clamp(20px,6vw,40px) 22px;scrollbar-width:none;overscroll-behavior:contain}
 .ch-scroll::-webkit-scrollbar{display:none}
 .ch-icon{font-size:clamp(48px,10vw,62px);filter:drop-shadow(0 0 20px rgba(255,255,255,.18));animation:popin .55s cubic-bezier(.175,.885,.32,1.275) both;flex-shrink:0}
 @keyframes popin{from{transform:scale(0) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
@@ -165,8 +165,8 @@ body{padding:16px}
 #lbclose:hover{background:rgba(255,255,255,.18);color:#fff}
 
 /* FINALE */
-#fs{justify-content:flex-start;padding-top:50px;align-items:center}
-.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:100dvh;padding:clamp(52px,8vw,70px) clamp(20px,6vw,40px) calc(var(--nav-h)+84px);scrollbar-width:none;overscroll-behavior:contain}
+#fs{justify-content:flex-start;padding-top:50px;align-items:center;padding-bottom:calc(var(--nav-h)+14px)}
+.f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:calc(100dvh - 50px - (var(--nav-h)+14px));padding:clamp(40px,7vw,56px) clamp(20px,6vw,40px) 22px;scrollbar-width:none;overscroll-behavior:contain}
 .f-scroll::-webkit-scrollbar{display:none}
 .f-icon{font-size:clamp(60px,12vw,76px);animation:bounce 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(255,200,50,.55));flex-shrink:0}
 .f-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,5.5vw,2.7rem);font-weight:700;line-height:1.2;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 3.5s linear infinite}
@@ -182,7 +182,7 @@ body{padding:16px}
 .rbtn:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);color:rgba(255,255,255,.82)}
 
 /* NAV */
-#nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 24px 22px;background:linear-gradient(to top,rgba(0,0,0,.96) 55%,transparent);z-index:150;min-height:var(--nav-h)}
+#nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 24px 22px;background:rgba(0,0,0,.94);border-top:1px solid rgba(255,255,255,.08);box-shadow:0 -10px 26px rgba(0,0,0,.46);z-index:150;min-height:var(--nav-h)}
 .nbtn{padding:clamp(10px,2vw,13px) clamp(22px,5vw,32px);font-size:clamp(.85rem,2.2vw,.93rem);font-weight:800;font-family:'Nunito',sans-serif;border:none;border-radius:50px;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.4px;white-space:nowrap}
 .nbtn:hover{transform:translateY(-3px)}
 .nbtn:active{transform:scale(.97)}
