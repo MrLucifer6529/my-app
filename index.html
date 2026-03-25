@@ -44,18 +44,6 @@ body{padding:16px}
 #flash{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(circle at center,rgba(255,110,199,.25),transparent 70%);transition:opacity .12s ease}
 #flash.pop{opacity:1}
 
-/* EASTER EGG */
-#eggmodal{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:600;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
-#eggmodal.show{opacity:1;pointer-events:all}
-.eggbox{max-width:480px;width:100%;background:linear-gradient(135deg,#1a0a2e,#2d1b69);border:1.5px solid rgba(255,255,255,.15);border-radius:24px;padding:36px 28px;text-align:center;box-shadow:0 0 60px rgba(150,80,255,.45);transform:scale(.88);transition:transform .35s}
-#eggmodal.show .eggbox{transform:scale(1)}
-.egg-icon{font-size:clamp(48px,10vw,64px);margin-bottom:12px}
-.egg-head{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,3.5vw,1.4rem);color:#ffe06e;margin-bottom:18px}
-.egg-body{font-size:clamp(.85rem,2.2vw,.95rem);color:rgba(255,255,255,.84);line-height:2;margin-bottom:20px}
-.egg-sign{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:clamp(.9rem,2.5vw,1.05rem);margin-bottom:22px}
-.egg-close{padding:10px 28px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.18);border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;transition:all .2s}
-.egg-close:hover{background:rgba(255,255,255,.16);color:#fff}
-
 /* TOAST */
 #toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
 #toast.show{opacity:1}
@@ -119,49 +107,6 @@ body{padding:16px}
 .cursor{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:text-bottom;margin-left:1px;animation:blink .75s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-/* PHOTO GALLERY */
-.gallery-label{font-size:.62rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-top:4px}
-.gallery{width:100%;overflow-x:auto;scrollbar-width:none;overscroll-behavior:contain;padding:4px 2px 8px}
-.gallery::-webkit-scrollbar{display:none}
-.gallery-track{display:flex;gap:10px;width:max-content;padding:0 2px}
-.world-note{font-size:.72rem;color:rgba(255,255,255,.62);margin-top:-6px;margin-bottom:2px;text-align:center;line-height:1.5}
-.worlds{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.wcard{
-  border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05);
-  border:1.3px solid rgba(255,255,255,.14);text-align:left;min-height:190px
-}
-.wcard img{display:block;width:100%;height:128px;object-fit:cover;background:#111}
-.wcap{padding:9px 10px 11px}
-.wtitle{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.76);margin-bottom:3px}
-.wtxt{font-size:.66rem;line-height:1.4;color:rgba(255,255,255,.58)}
-.gphoto{
-  flex-shrink:0;
-  border-radius:16px;
-  overflow:hidden;
-  border:1.5px solid rgba(255,255,255,.15);
-  box-shadow:0 4px 20px rgba(0,0,0,.45);
-  position:relative;
-  cursor:pointer;
-  transition:transform .25s,box-shadow .25s;
-}
-.gphoto:hover{transform:scale(1.04);box-shadow:0 8px 32px rgba(169,110,255,.45)}
-.gphoto img{display:block;width:130px;height:175px;object-fit:cover;object-position:top center}
-.gphoto.couple img{width:190px;height:175px;object-position:center}
-.gphoto-caption{
-  position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
-  padding:18px 8px 7px;
-  font-size:.58rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.7);text-align:center;
-}
-
-/* LIGHTBOX */
-#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:700;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
-#lightbox.show{opacity:1;pointer-events:all}
-#lightbox img{max-width:100%;max-height:90dvh;border-radius:20px;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,.8)}
-#lbclose{position:absolute;top:18px;right:18px;font-size:1.6rem;cursor:pointer;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border:none;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-#lbclose:hover{background:rgba(255,255,255,.18);color:#fff}
-
 /* FINALE */
 #fs{justify-content:flex-start;padding-top:50px;align-items:center}
 .f-scroll{width:100%;max-width:var(--max);margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;overflow-y:auto;max-height:100dvh;padding:clamp(42px,7vw,60px) clamp(20px,6vw,40px) 24px;scrollbar-width:none;overscroll-behavior:contain}
@@ -191,8 +136,8 @@ body{padding:16px}
 #bnext.skip{background:linear-gradient(135deg,#a96eff,#6ef0ff)}
 #fwc{position:fixed;inset:0;pointer-events:none;z-index:5}
 .nav-slot{width:100%;display:flex;justify-content:center}
-@media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}.gphoto img{width:160px;height:215px}.gphoto.couple img{width:230px;height:215px}}
-@media(max-width:460px){.worlds{grid-template-columns:1fr}.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}}
+@media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}}
+@media(max-width:460px){.t-hearts{gap:5px;font-size:1.1rem}}
 </style>
 </head>
 <body>
@@ -203,23 +148,6 @@ body{padding:16px}
 <div id="intro">
   <div class="intro-heart">💜</div>
   <div class="intro-text">A story written just for you...</div>
-</div>
-
-<!-- EASTER EGG -->
-<div id="eggmodal" onclick="eggOutside(event)">
-  <div class="eggbox">
-    <div class="egg-icon">🩵</div>
-    <div class="egg-head">A secret, just for you</div>
-    <div class="egg-body">You found it. Of course you did.<br><br>I hid this here because some things are too precious for everyone to see. This is one of them.<br><br>I love you in the quietest, most certain way I know how. No performance. No audience. Just me, completely yours.<br><br>Thank you for being the kind of person who looks for hidden things. You found all the hidden parts of me too. And you stayed.<br><br>Always. 🌹</div>
-    <div class="egg-sign">— Samy 🩵</div>
-    <button class="egg-close" onclick="closeEgg()">Close</button>
-  </div>
-</div>
-
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLB()">
-  <button id="lbclose" onclick="closeLB()">✕</button>
-  <img id="lbimg" src="" alt="">
 </div>
 
 <div id="flash"></div>
@@ -265,16 +193,6 @@ body{padding:16px}
     <div class="f-title">Happy Birthday, Meri Jaan 💜</div>
     <div class="f-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💖</span><span>🍒</span></div>
 
-    <!-- ═══ PHOTO GALLERY ═══ -->
-    <p class="gallery-label">🌸 Us 🌸</p>
-    <div class="gallery">
-      <div class="gallery-track" id="galleryTrack"></div>
-    </div>
-    <!-- ══════════════════════ -->
-    <p class="gallery-label">🎮 Our Worlds: Genshin + Minecraft ⛏️</p>
-    <p class="world-note">From your first Mondstadt steps to our late-night Minecraft home builds.</p>
-    <div class="worlds" id="gameworlds"></div>
-
     <div class="f-msg"  id="fmsg"></div>
     <div class="f-sign" id="fsign"></div>
     <div class="nav-slot" id="navslot-fs"></div>
@@ -289,24 +207,6 @@ body{padding:16px}
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  PHOTOS — replace these paths with your actual files
-//  Put your photos in a folder called "photos" next to index.html
-//  Name them exactly as below when uploading to Vercel
-// ═══════════════════════════════════════════════════════
-const PHOTOS = [
-  { src:'./photos/sherry1.jpg', caption:'Meri Jaan 🌸' },
-  { src:'./photos/sherry2.jpg', caption:'My Everything 🩵' },
-  { src:'./photos/sherry3.jpg', caption:'So Beautiful 💜' },
-  { src:'./photos/sherry4.jpg', caption:'My Whole Heart 🌹' },
-  { src:'./photos/us.jpg',      caption:'Us 💜', couple:true },
-];
-const GAME_MEDIA = [
-  {src:'https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Genshin_Impact_cover.jpg/640px-Genshin_Impact_cover.jpg',title:'How It Started',text:'You in Mondstadt, me joining your world. Teyvat changed everything.'},
-  {src:'https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png',title:'Where We Are Now',text:'Now we build our little world block by block in Minecraft.'},
-  {src:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Minecraft_logo.svg/640px-Minecraft_logo.svg.png',title:'Our Cozy Server',text:'A tiny base, warm lights, and you beside me feels like home in every world.'},
-];
-
 // ═══════════════════════════════════════════════════════
 //  CAT GIFS
 // ═══════════════════════════════════════════════════════
@@ -593,38 +493,6 @@ Happy Birthday, meri jaan.
 My love. My home. My naseeb. My forever.`;
 const SIGN=`Forever and utterly yours,\nSamy  🩵`;
 
-// ─── BUILD GALLERY ───
-(function(){
-  const track=document.getElementById('galleryTrack');
-  PHOTOS.forEach(p=>{
-    const div=document.createElement('div');
-    div.className='gphoto'+(p.couple?' couple':'');
-    const img=document.createElement('img');
-    img.src=p.src;img.alt=p.caption;img.loading='lazy';
-    img.onerror=function(){this.parentElement.style.display='none';};
-    const cap=document.createElement('div');
-    cap.className='gphoto-caption';cap.textContent=p.caption;
-    div.appendChild(img);div.appendChild(cap);
-    div.onclick=()=>openLB(p.src);
-    track.appendChild(div);
-  });
-})();
-(function(){
-  const wrap=document.getElementById('gameworlds');
-  GAME_MEDIA.forEach(m=>{
-    const card=document.createElement('div');
-    card.className='wcard';
-    card.innerHTML=
-      `<img src="${m.src}" alt="${m.title}" onerror="this.parentElement.style.display='none'">`+
-      `<div class="wcap"><div class="wtitle">${m.title}</div><div class="wtxt">${m.text}</div></div>`;
-    wrap.appendChild(card);
-  });
-})();
-
-// ─── LIGHTBOX ───
-function openLB(src){const lb=document.getElementById('lightbox');document.getElementById('lbimg').src=src;lb.classList.add('show');}
-function closeLB(){document.getElementById('lightbox').classList.remove('show');}
-
 // ─── DRAGGABLE MUSIC BUTTON ───
 (function(){
   const btn=document.getElementById('musicbtn');
@@ -687,9 +555,6 @@ for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot'
 window.addEventListener('load',()=>{const iv=gi('intro');setTimeout(()=>{iv.classList.add('fade');setTimeout(()=>iv.remove(),650);},2400);});
 const saved=parseInt(localStorage.getItem('ourStory_ch')||'0');
 if(saved>0&&saved<=TOTAL){const cb=gi('continuebtn');cb.style.display='block';cb.textContent=`Continue: Chapter ${saved}`;cb.onclick=()=>goTo(saved);}
-
-function closeEgg(){gi('eggmodal').classList.remove('show');}
-function eggOutside(e){if(e.target===gi('eggmodal'))closeEgg();}
 
 function doFlash(){const f=gi('flash');f.classList.add('pop');setTimeout(()=>f.classList.remove('pop'),280);}
 
