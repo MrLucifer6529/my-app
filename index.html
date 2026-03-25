@@ -59,7 +59,7 @@ body{padding:16px}
 .egg-close:hover{background:rgba(255,255,255,.16);color:#fff}
 
 /* TOAST */
-#toast{position:fixed;bottom:calc(var(--nav-h)+16px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
+#toast{position:fixed;bottom:calc(var(--nav-h)+90px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
 #toast.show{opacity:1}
 
 /* DRAGGABLE MUSIC BTN */
@@ -86,8 +86,8 @@ body{padding:16px}
 .dot.done{background:var(--accent);box-shadow:0 0 8px var(--accent)}
 .dot.active{background:#fff;transform:scale(1.45);box-shadow:0 0 12px rgba(255,255,255,.7)}
 #gamehud{
-  position:fixed;top:44px;right:14px;z-index:210;
-  width:min(46vw,210px);padding:10px 10px 8px;
+  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h)+10px);z-index:210;
+  width:min(92vw,420px);padding:10px 10px 8px;
   background:rgba(8,8,18,.62);border:1px solid rgba(255,255,255,.16);border-radius:14px;
   backdrop-filter:blur(8px);box-shadow:0 8px 22px rgba(0,0,0,.35)
 }
@@ -146,6 +146,15 @@ body{padding:16px}
 .gallery{width:100%;overflow-x:auto;scrollbar-width:none;overscroll-behavior:contain;padding:4px 2px 8px}
 .gallery::-webkit-scrollbar{display:none}
 .gallery-track{display:flex;gap:10px;width:max-content;padding:0 2px}
+.worlds{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.wcard{
+  border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05);
+  border:1.3px solid rgba(255,255,255,.14);text-align:left;min-height:190px
+}
+.wcard img{display:block;width:100%;height:128px;object-fit:cover;background:#111}
+.wcap{padding:9px 10px 11px}
+.wtitle{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.76);margin-bottom:3px}
+.wtxt{font-size:.66rem;line-height:1.4;color:rgba(255,255,255,.58)}
 .gphoto{
   flex-shrink:0;
   border-radius:16px;
@@ -217,8 +226,9 @@ body{padding:16px}
   100%{transform:translateY(-18px) scale(1.1);opacity:0}
 }
 
-@media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}.gphoto img{width:160px;height:215px}.gphoto.couple img{width:230px;height:215px}#gamehud{width:220px}}
-@media(max-width:380px){.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}#gamehud{top:40px;right:8px;padding:8px;width:min(56vw,190px)}}
+@media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}.gphoto img{width:160px;height:215px}.gphoto.couple img{width:230px;height:215px}}
+@media(min-width:900px){#gamehud{left:auto;transform:none;right:14px;bottom:14px;width:270px}#toast{bottom:20px}}
+@media(max-width:460px){.worlds{grid-template-columns:1fr}.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}#gamehud{padding:8px}}
 </style>
 </head>
 <body>
@@ -280,8 +290,8 @@ body{padding:16px}
   <div class="t-head" id="tHead">Our Story</div>
   <p class="t-ded">To my love of life, <strong>Sherry</strong><br>From the one who is forever and utterly yours</p>
   <div class="t-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💋</span></div>
-  <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to Forever</p>
-  <p class="t-hint">✨ tap the title three times for a secret · choose chapter quests · collect floating hearts</p>
+  <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to The Overworld</p>
+  <p class="t-hint">✨ triple-tap title for secret · pick your chapter quest · collect hearts · unlock game badges</p>
   <button id="continuebtn"></button>
 </div>
 
@@ -292,7 +302,7 @@ body{padding:16px}
     <div class="ch-title"  id="ctitle"></div>
     <div class="ch-sub"    id="csub"></div>
     <div class="questbox" id="questbox">
-      <div class="questhead">Chapter Quest</div>
+      <div class="questhead">Sherry Quest</div>
       <div class="questq" id="questq"></div>
       <div class="questopts" id="questopts"></div>
     </div>
@@ -313,6 +323,8 @@ body{padding:16px}
       <div class="gallery-track" id="galleryTrack"></div>
     </div>
     <!-- ══════════════════════ -->
+    <p class="gallery-label">🎮 Our Worlds: Genshin + Minecraft ⛏️</p>
+    <div class="worlds" id="gameworlds"></div>
 
     <div class="f-msg"  id="fmsg"></div>
     <div class="f-sign" id="fsign"></div>
@@ -344,6 +356,12 @@ const PHOTOS = [
   { src:'./photos/sherry4.jpg', caption:'My Whole Heart 🌹' },
   { src:'./photos/us.jpg',      caption:'Us 💜', couple:true },
 ];
+const GAME_MEDIA = [
+  {src:'https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Genshin_Impact_cover.jpg/640px-Genshin_Impact_cover.jpg',title:'How It Started',text:'You in Mondstadt, me joining your world. Teyvat changed everything.'},
+  {src:'https://media.tenor.com/cSFfMSE0A2sAAAAi/genshin-impact-venti.gif',title:'Teyvat Energy',text:'Anemo vibes, late-night calls, and the beginning of our story quests.'},
+  {src:'https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png',title:'Where We Are Now',text:'Now we build our little world block by block in Minecraft.'},
+  {src:'https://media.tenor.com/2roX3uxz_68AAAAC/nyan-cat.gif',title:'Chaotic Co-op',text:'Us running around, laughing, surviving creepers, and making memories.'},
+];
 
 // ═══════════════════════════════════════════════════════
 //  CAT GIFS
@@ -359,31 +377,31 @@ const CATS={
 };
 
 const QUESTS=[
-  {q:'Mission 1: Pick your opening move.',opts:[{t:'Join her world 🎮 (+8 XP)',xp:8,h:1,m:'You entered her world. Perfect start.'},{t:'Send a risky hello 💬 (+6 XP)',xp:6,h:1,m:'Bold move unlocked.'},{t:'Drop a mystery line ✨ (+10 XP)',xp:10,h:1,m:'Mysterious rizz activated.'}]},
-  {q:'Mission 2: Keep the spark alive.',opts:[{t:'Reply with a reel 📱 (+7 XP)',xp:7,h:1,m:'Reel combo chain started.'},{t:'Send a voice note 🎙️ (+9 XP)',xp:9,h:1,m:'Voice note was super effective.'},{t:'Stay up talking late 🌙 (+10 XP)',xp:10,h:2,m:'Late-night bond leveled up.'}]},
-  {q:'Mission 3: Enemies-to-lovers mode.',opts:[{t:'Tease her softly 😏 (+7 XP)',xp:7,h:1,m:'Playful tension detected.'},{t:'Give real talk ⚔️ (+9 XP)',xp:9,h:1,m:'Reality-check buff unlocked.'},{t:'Choose honesty over ego 💜 (+11 XP)',xp:11,h:2,m:'True love path selected.'}]},
-  {q:'Mission 4: Confession boss fight.',opts:[{t:'Say what you feel 💋 (+8 XP)',xp:8,h:1,m:'Confession damage critical.'},{t:'Promise to stay 🤍 (+10 XP)',xp:10,h:2,m:'Security aura activated.'},{t:'Hold her through tears 🫂 (+12 XP)',xp:12,h:2,m:'Safe-space mastery unlocked.'}]},
-  {q:'Mission 5: Sacred night quest.',opts:[{t:'Move gently and patiently 🌙 (+9 XP)',xp:9,h:2,m:'Trust meter rising.'},{t:'Choose tenderness first 🌸 (+10 XP)',xp:10,h:2,m:'Tenderness combo achieved.'},{t:'Protect her heart always 🛡️ (+12 XP)',xp:12,h:2,m:'Guardian class unlocked.'}]},
-  {q:'Mission 6: Storm survival.',opts:[{t:'Stand your ground 🌩️ (+9 XP)',xp:9,h:1,m:'Storm resistance increased.'},{t:'Speak truth with courage 🗣️ (+11 XP)',xp:11,h:2,m:'Courage buff applied.'},{t:'Choose her in public too 💍 (+13 XP)',xp:13,h:2,m:'Commitment rank advanced.'}]},
-  {q:'Mission 7: Anniversary checkpoint.',opts:[{t:'Celebrate every tiny win 🎉 (+8 XP)',xp:8,h:1,m:'Joy multiplier active.'},{t:'Thank Allah for this love 🤲 (+10 XP)',xp:10,h:2,m:'Gratitude bonus granted.'},{t:'Re-choose her daily 💜 (+12 XP)',xp:12,h:2,m:'Loyalty streak maintained.'}]},
-  {q:'Mission 8: Fight-and-fix challenge.',opts:[{t:'Apologize first when wrong 🙏 (+9 XP)',xp:9,h:1,m:'Pride debuff removed.'},{t:'Fight fair, not cruel 🫀 (+10 XP)',xp:10,h:2,m:'Respect shield restored.'},{t:'Always come back to love 🌹 (+12 XP)',xp:12,h:2,m:'Reunion buff unlocked.'}]},
-  {q:'Mission 9: Home chapter.',opts:[{t:'Share every little moment ✉️ (+8 XP)',xp:8,h:1,m:'Daily sharing streak +1.'},{t:'Be her calm in chaos 🌊 (+10 XP)',xp:10,h:2,m:'Calm-core unlocked.'},{t:'Pray for her by name 🤍 (+12 XP)',xp:12,h:2,m:'Soul-bond energy maxed.'}]},
-  {q:'Mission 10: Forever route.',opts:[{t:'Call her your home 🏠 (+9 XP)',xp:9,h:1,m:'Home base secured.'},{t:'Promise forever, no doubt 💞 (+11 XP)',xp:11,h:2,m:'Forever protocol enabled.'},{t:'Crown her your greatest gift 👑 (+13 XP)',xp:13,h:2,m:'Legendary lover tier reached.'}]},
+  {q:'Sherry Quest 1: Choose your starter path in Teyvat.',opts:[{t:'Anemo traveler style 🌬️ (+8 XP)',xp:8,h:1,m:'Adventure Rank increased.'},{t:'Sword-main confidence ⚔️ (+6 XP)',xp:6,h:1,m:'Combat spirit unlocked.'},{t:'Wish-star luck ✨ (+10 XP)',xp:10,h:1,m:'5-star aura activated.'}]},
+  {q:'Sherry Quest 2: Build connection EXP.',opts:[{t:'Reel combo attack 📱 (+7 XP)',xp:7,h:1,m:'Social combo chained.'},{t:'Voice note crit 🎙️ (+9 XP)',xp:9,h:1,m:'Emotional damage dealt.'},{t:'Late-night co-op chat 🌙 (+10 XP)',xp:10,h:2,m:'Bond level up.'}]},
+  {q:'Sherry Quest 3: Enemies-to-lovers dungeon.',opts:[{t:'Playful roast mode 😏 (+7 XP)',xp:7,h:1,m:'Teasing buff applied.'},{t:'Real-talk burst ⚔️ (+9 XP)',xp:9,h:1,m:'Truth burst unlocked.'},{t:'Choose heart over ego 💜 (+11 XP)',xp:11,h:2,m:'Love route selected.'}]},
+  {q:'Sherry Quest 4: Confession boss battle.',opts:[{t:'Critical honesty hit 💋 (+8 XP)',xp:8,h:1,m:'Boss HP melting.'},{t:'Trust shield on 🤍 (+10 XP)',xp:10,h:2,m:'Safety shield activated.'},{t:'Soft-heart finisher 🫂 (+12 XP)',xp:12,h:2,m:'Boss fight cleared.'}]},
+  {q:'Sherry Quest 5: Sacred trust storyline.',opts:[{t:'Gentle pace mastery 🌙 (+9 XP)',xp:9,h:2,m:'Comfort aura up.'},{t:'Tenderness combo chain 🌸 (+10 XP)',xp:10,h:2,m:'Warmth multiplier active.'},{t:'Guardian mode on 🛡️ (+12 XP)',xp:12,h:2,m:'Heart protection unlocked.'}]},
+  {q:'Sherry Quest 6: Storm arc challenge.',opts:[{t:'Stand firm like bedrock 🌩️ (+9 XP)',xp:9,h:1,m:'Resolve increased.'},{t:'Speak bravely to the world 🗣️ (+11 XP)',xp:11,h:2,m:'Courage rank up.'},{t:'Choose love publicly 💍 (+13 XP)',xp:13,h:2,m:'Legendary commitment achieved.'}]},
+  {q:'Sherry Quest 7: Anniversary event.',opts:[{t:'Celebrate tiny loot drops 🎉 (+8 XP)',xp:8,h:1,m:'Joy event unlocked.'},{t:'Gratitude prayer buff 🤲 (+10 XP)',xp:10,h:2,m:'Blessing aura granted.'},{t:'Daily choose-us streak 💜 (+12 XP)',xp:12,h:2,m:'Streak preserved.'}]},
+  {q:'Sherry Quest 8: Fight-fix PvP match.',opts:[{t:'Fast apology reset 🙏 (+9 XP)',xp:9,h:1,m:'Cooldown reduced.'},{t:'Fair-fight ruleset 🫀 (+10 XP)',xp:10,h:2,m:'Respect shield repaired.'},{t:'Return-to-love instant 🌹 (+12 XP)',xp:12,h:2,m:'Reunion animation triggered.'}]},
+  {q:'Sherry Quest 9: Home base expansion.',opts:[{t:'Share every little drop ✉️ (+8 XP)',xp:8,h:1,m:'Daily quest completed.'},{t:'Be calm in chaos 🌊 (+10 XP)',xp:10,h:2,m:'Stability skill unlocked.'},{t:'Dua by name always 🤍 (+12 XP)',xp:12,h:2,m:'Soul-link strengthened.'}]},
+  {q:'Sherry Quest 10: Minecraft forever realm.',opts:[{t:'Build us a cozy base 🏠 (+9 XP)',xp:9,h:1,m:'Home chunk claimed.'},{t:'Survive creepers together 💚 (+11 XP)',xp:11,h:2,m:'Creeper-proof duo unlocked.'},{t:'Diamond-tier forever promise 💎 (+13 XP)',xp:13,h:2,m:'Forever world generated.'}]},
 ];
 
 const THEMES=[
-  ['💜','🌹','🌸','✨','💫'],
-  ['🎮','⚔️','✨','🌟','💫'],
-  ['📱','💬','💫','🌸','✉️'],
-  ['⚔️','💢','🌊','💫','🔥'],
-  ['💋','💜','🫧','🌸','💓'],
-  ['🌙','✨','🌟','💫','🌌'],
-  ['🌩️','💫','🌊','🔥','⚡'],
-  ['🎉','🎊','✨','💜','🥂'],
-  ['💥','⚡','🔥','💢','💫'],
-  ['🫀','🌸','💜','🌹','🤍'],
-  ['🌸','🌹','💐','🍒','💋'],
-  ['🎂','🎉','💜','🌹','✨','🩵'],
+  ['💜','🌹','🌸','✨','💫','🎮'],
+  ['🎮','⚔️','✨','🌟','💫','🌬️'],
+  ['📱','💬','💫','🌸','✉️','🧭'],
+  ['⚔️','💢','🌊','💫','🔥','🗺️'],
+  ['💋','💜','🫧','🌸','💓','🎵'],
+  ['🌙','✨','🌟','💫','🌌','🎮'],
+  ['🌩️','💫','🌊','🔥','⚡','⛏️'],
+  ['🎉','🎊','✨','💜','🥂','🧱'],
+  ['💥','⚡','🔥','💢','💫','🟩'],
+  ['🫀','🌸','💜','🌹','🤍','💎'],
+  ['🌸','🌹','💐','🍒','💋','🏠'],
+  ['🎂','🎉','💜','🌹','✨','🩵','🎮','⛏️'],
 ];
 
 const CH=[
@@ -652,6 +670,17 @@ const SIGN=`Forever and utterly yours,\nSamy  🩵`;
     track.appendChild(div);
   });
 })();
+(function(){
+  const wrap=document.getElementById('gameworlds');
+  GAME_MEDIA.forEach(m=>{
+    const card=document.createElement('div');
+    card.className='wcard';
+    card.innerHTML=
+      `<img src="${m.src}" alt="${m.title}" onerror="this.parentElement.style.display='none'">`+
+      `<div class="wcap"><div class="wtitle">${m.title}</div><div class="wtxt">${m.text}</div></div>`;
+    wrap.appendChild(card);
+  });
+})();
 
 // ─── LIGHTBOX ───
 function openLB(src){const lb=document.getElementById('lightbox');document.getElementById('lbimg').src=src;lb.classList.add('show');}
@@ -756,7 +785,7 @@ function levelParts(){
 }
 function updateHud(){
   const lv=levelParts();
-  $hudlvl.textContent=`LVL ${lv.lvl}`;
+  $hudlvl.textContent=`AR ${lv.lvl} · LOVE`;
   $hudstats.textContent=`${loveHearts} ❤️ · ${badges.size} 🏅`;
   $xpfill.style.width=(lv.inLvl/lv.next*100)+'%';
   $xptxt.textContent=`${lv.inLvl} / ${lv.next} XP`;
@@ -782,11 +811,11 @@ function chooseQuest(chIdx,optIdx,opt){
   chapterChoices[chIdx]=optIdx;
   loveXP+=opt.xp;
   loveHearts+=opt.h;
-  grantBadge('Quest Starter');
+  grantBadge('Teyvat Traveler');
   const done=Object.keys(chapterChoices).length;
-  if(done>=5)grantBadge('Halfway Hero');
-  if(done>=TOTAL)grantBadge('Story Master');
-  if(opt.xp>=12)grantBadge('Legend Choice');
+  if(done>=5)grantBadge('Overworld Builder');
+  if(done>=TOTAL)grantBadge('Diamond Duo');
+  if(opt.xp>=12)grantBadge('Mythic Choice');
   renderQuest(chIdx);
   updateHud();
   saveGame();
@@ -796,10 +825,10 @@ function renderSummary(){
   const done=Object.keys(chapterChoices).length;
   const lv=levelParts();
   $gsumstats.innerHTML=
-    `Level <strong>${lv.lvl}</strong> love adventurer<br>`+
-    `Collected hearts: <strong>${loveHearts}</strong><br>`+
-    `Chapter quests completed: <strong>${done}/${TOTAL}</strong><br>`+
-    `Floating hearts caught: <strong>${collectedOrbs}</strong>`;
+    `Adventure Rank: <strong>${lv.lvl}</strong><br>`+
+    `Heart crystals collected: <strong>${loveHearts}</strong><br>`+
+    `Story quests completed: <strong>${done}/${TOTAL}</strong><br>`+
+    `Floating loot caught: <strong>${collectedOrbs}</strong>`;
   $gsumbadges.innerHTML='';
   [...badges].sort().forEach(b=>{
     const el=document.createElement('span');
@@ -822,9 +851,9 @@ function spawnLootHeart(){
     if(!b.parentElement)return;
     b.remove();
     loveHearts+=1;loveXP+=4;collectedOrbs+=1;
-    if(collectedOrbs>=10)grantBadge('Heart Hunter');
+    if(collectedOrbs>=10)grantBadge('Crystal Collector');
     updateHud();saveGame();
-    showToast('Heart captured! +4 XP');
+    showToast('Loot collected! +4 XP');
   };
   $loot.appendChild(b);
   setTimeout(()=>b.remove(),4200);
@@ -837,7 +866,8 @@ const saved=parseInt(localStorage.getItem('ourStory_ch')||'0');
 if(saved>0&&saved<=TOTAL){const cb=gi('continuebtn');cb.style.display='block';cb.textContent=`Continue: Chapter ${saved}`;cb.onclick=()=>goTo(saved);}
 
 let taps=0,tapTimer=null;
-gi('tHead').addEventListener('click',()=>{taps++;clearTimeout(tapTimer);if(taps>=3){taps=0;gi('eggmodal').classList.add('show');grantBadge('Secret Finder');updateHud();saveGame();}else tapTimer=setTimeout(()=>{taps=0;},700);});
+gi('tHead').addEventListener('click',()=>{taps++;clearTimeout(tapTimer);if(taps>=3){taps=0;gi('eggmodal').classList.add('show');grantBadge('Hidden Chest Hunter');updateHud();saveGame();}else tapTimer=setTimeout(()=>{taps=0;},700);});
+gi('tHead').addEventListener('click',()=>{if(state===0&&Math.random()>.65)showToast('Birthday Event: Lucky pull vibes ✨');});
 function closeEgg(){gi('eggmodal').classList.remove('show');}
 function eggOutside(e){if(e.target===gi('eggmodal'))closeEgg();}
 
