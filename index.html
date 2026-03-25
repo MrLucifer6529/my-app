@@ -112,7 +112,7 @@ body{padding:16px}
 @keyframes popin{from{transform:scale(0) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
 .ch-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.25rem,4.5vw,2.05rem);font-weight:700;color:var(--accent);line-height:1.25;text-shadow:0 0 28px color-mix(in srgb,var(--accent) 50%,transparent);padding:0 4px}
 .ch-sub{font-size:clamp(.6rem,1.6vw,.68rem);font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.24);padding:0 8px}
-.narrative{font-size:clamp(.88rem,2.3vw,1.04rem);line-height:2.1;color:rgba(255,255,255,.88);text-align:left;white-space:pre-wrap;width:100%;padding:0 16px}
+.narrative{font-size:clamp(.88rem,2.3vw,1.04rem);line-height:2.1;color:rgba(255,255,255,.88);text-align:left;white-space:pre-wrap;width:100%;padding:0 16px 16px}
 .cursor{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:text-bottom;margin-left:1px;animation:blink .75s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
@@ -156,7 +156,7 @@ body{padding:16px}
 .f-icon{font-size:clamp(60px,12vw,76px);animation:bounce 2s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(255,200,50,.55));flex-shrink:0}
 .f-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.5rem,5.5vw,2.7rem);font-weight:700;line-height:1.2;background:linear-gradient(90deg,#ff6ec7,#ffe06e,#a96eff,#6ef0ff);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:rbow 3.5s linear infinite}
 .f-hearts{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,12px);font-size:clamp(1.2rem,4vw,1.5rem);animation:hpulse 2s ease-in-out infinite}
-.f-msg{font-size:clamp(.88rem,2.3vw,1.04rem);color:rgba(255,255,255,.87);line-height:2.1;text-align:left;white-space:pre-wrap;width:100%;padding:0 16px}
+.f-msg{font-size:clamp(.88rem,2.3vw,1.04rem);color:rgba(255,255,255,.87);line-height:2.1;text-align:left;white-space:pre-wrap;width:100%;padding:0 16px 16px}
 .f-sign{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,2.5vw,1.18rem);color:#ffe06e;text-align:right;width:100%;opacity:.88}
 .rbtn{padding:12px 32px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;font-size:clamp(.78rem,2vw,.85rem);font-weight:700;border:1px solid rgba(255,255,255,.13);border-radius:50px;cursor:pointer;transition:all .22s}
 .rbtn:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);color:rgba(255,255,255,.82)}
@@ -213,6 +213,8 @@ body{padding:16px}
 </div>
 <div class="fcat fc1"><img src="https://media.tenor.com/CnP64S7lszwAAAAj/meme-cat-cat-meme.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
 <div class="fcat fc2"><img src="https://media.tenor.com/xXNzEkd7BYYAAAAi/yapapa-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
+<div class="fcat fc1" style="bottom:60%;animation-duration:28s;animation-delay:5s"><img src="https://media.tenor.com/0UPw9RZF_cAAAAAj/pop-cat.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
+<div class="fcat fc2" style="top:58%;animation-duration:26s;animation-delay:3s"><img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="" onerror="this.parentElement.style.display='none'"></div>
 
 <div id="pbar"><div id="pfill" style="width:0%"></div></div>
 <div id="clabel"></div>
@@ -286,6 +288,9 @@ const CATS={
   excited:'https://media.tenor.com/0UPw9RZF_cAAAAAj/pop-cat.gif',
   happy  :'https://media.tenor.com/CnP64S7lszwAAAAj/meme-cat-cat-meme.gif',
   chaotic:'https://media.tenor.com/xXNzEkd7BYYAAAAi/yapapa-cat.gif',
+  keyboard:'https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif',
+  grumpy:'https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif',
+  typing:'https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif',
 };
 
 const THEMES=[
@@ -358,7 +363,7 @@ You fell in love while pretending you had not. You fell before you had permissio
 Every tear from those battles only pulled you closer to me. And I was falling just as hard in the opposite direction, right toward you.
 
 We were utterly each other's before either of us admitted it.`},
-{label:'Chapter 4  ·  The Confession',title:'You Made Me Surrender',sub:'💋  The most honest messy beautiful moment  💋',icon:'💬',accent:'#f48fb1',bg:['#1f0a1a','#300f25'],cat:CATS.chaotic,
+{label:'Chapter 4  ·  The Confession',title:'You Made Me Surrender',sub:'💋  The most honest messy beautiful moment  💋',icon:'💬',accent:'#f48fb1',bg:['#1f0a1a','#300f25'],cat:CATS.keyboard,
 text:`You were scared I would leave.
 
 You had been let down before. And I could feel that fear living underneath every argument, every hard word, every moment you pushed me away with both hands while everything in your eyes was begging me to stay.
@@ -386,7 +391,7 @@ For the first time in years, tears fell.
 And I held you through every single one of them.
 
 Meri jaan. I meant every word. I still do. I always will.`},
-{label:'Chapter 5  ·  The Most Sacred Night',title:'The Moment That Built Us',sub:'🌙  The night that split everything into before and after  🌙',icon:'🌙',accent:'#b39ddb',bg:['#120a2e','#1a1040'],cat:CATS.happy,
+{label:'Chapter 5  ·  The Most Sacred Night',title:'The Moment That Built Us',sub:'🌙  The night that split everything into before and after  🌙',icon:'🌙',accent:'#b39ddb',bg:['#120a2e','#1a1040'],cat:CATS.grumpy,
 text:`There are moments that split a life into before and after.
 
 That was one of them.
@@ -408,7 +413,7 @@ Meri jaan, you were always beautiful. That night just finally let you feel what 
 You trusted me with yourself completely. And I held that like the sacred thing it was.
 
 Because it was. Because you are.`},
-{label:'Chapter 6  ·  The Storm',title:'They Tried. We Stayed.',sub:'🌩️  The whole world came for us  🌩️',icon:'🌩️',accent:'#ef9a9a',bg:['#1a0808','#2e0f0f'],cat:CATS.chaotic,
+{label:'Chapter 6  ·  The Storm',title:'They Tried. We Stayed.',sub:'🌩️  The whole world came for us  🌩️',icon:'🌩️',accent:'#ef9a9a',bg:['#1a0808','#2e0f0f'],cat:CATS.typing,
 text:`Then the storm arrived.
 
 Your brother found out. Your siblings came at us hard. Everything we had quietly built together suddenly had the whole world trying to dismantle it from every side.
@@ -436,7 +441,7 @@ We held on. Not because it was easy. Because you were worth every single storm.
 They tried.
 
 We are still here. Still us. Still choosing each other.`},
-{label:'Chapter 7  ·  One Year and Beyond',title:'Still Here. Still Us.',sub:'🎉  One year of choosing each other  🎉',icon:'🎉',accent:'#ffe06e',bg:['#1a1500','#2e2200'],cat:CATS.happy,
+{label:'Chapter 7  ·  One Year and Beyond',title:'Still Here. Still Us.',sub:'🎉  One year of choosing each other  🎉',icon:'🎉',accent:'#ffe06e',bg:['#1a1500','#2e2200'],cat:CATS.keyboard,
 text:`They thought it was the end.
 
 Honestly, in those hardest moments, part of me did not know either.
@@ -460,7 +465,7 @@ Now I know.
 I know the answer to every question I ever had about love. And the answer is you.
 
 We made it, meri jaan. And this is only the beginning.`},
-{label:'Chapter 8  ·  World War 3 and Making Up',title:'We Fight Like the World is Ending',sub:'💥  And come back closer every single time  💥',icon:'💥',accent:'#ffab91',bg:['#1a0f0a','#2e1a10'],cat:CATS.chaotic,
+{label:'Chapter 8  ·  World War 3 and Making Up',title:'We Fight Like the World is Ending',sub:'💥  And come back closer every single time  💥',icon:'💥',accent:'#ffab91',bg:['#1a0f0a','#2e1a10'],cat:CATS.grumpy,
 text:`Okay let me be completely honest with you.
 
 I make mistakes. You know this. The walls of every room we have ever been in know this.
@@ -482,7 +487,7 @@ I would take our messiest, loudest, most chaotic fight over peace with anyone el
 Every single time.
 
 That is not a small thing, meri jaan. That is everything.`},
-{label:'Chapter 9  ·  A Part of Me',title:'You Are Home',sub:'🫀  My person. My shore. My everything.  🫀',icon:'🫀',accent:'#f48fb1',bg:['#1f0a18','#2e1022'],cat:CATS.happy,
+{label:'Chapter 9  ·  A Part of Me',title:'You Are Home',sub:'🫀  My person. My shore. My everything.  🫀',icon:'🫀',accent:'#f48fb1',bg:['#1f0a18','#2e1022'],cat:CATS.typing,
 text:`You have become a part of me I do not know how to exist without.
 
 One day without talking to you and something feels wrong. Like a piece of the day is missing. Like I walked out of the house and left something important behind and cannot figure out what it is until I remember.
@@ -502,7 +507,7 @@ You are my shore, meri jaan. The place I run to when my own chaos gets too loud.
 You are home to me.
 
 And I am never leaving.`},
-{label:'Chapter 10  ·  The Most Beautiful',title:'You Ruined Everyone Else',sub:'🌸  After you, everyone else just faded  🌸',icon:'🌸',accent:'#f8bbd0',bg:['#1f0a18','#35102a'],cat:CATS.excited,
+{label:'Chapter 10  ·  The Most Beautiful',title:'You Ruined Everyone Else',sub:'🌸  After you, everyone else just faded  🌸',icon:'🌸',accent:'#f8bbd0',bg:['#1f0a18','#35102a'],cat:CATS.keyboard,
 text:`I need you to understand something.
 
 Before you, I could look around and just see people. The world was normal. Everyone was just there.
