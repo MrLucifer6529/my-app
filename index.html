@@ -59,7 +59,7 @@ body{padding:16px}
 .egg-close:hover{background:rgba(255,255,255,.16);color:#fff}
 
 /* TOAST */
-#toast{position:fixed;bottom:calc(var(--nav-h)+90px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
+#toast{position:fixed;bottom:calc(var(--nav-h)+16px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff6ec7,#a96eff);color:#fff;padding:10px 24px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:.5px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;white-space:nowrap;box-shadow:0 4px 20px rgba(169,110,255,.5)}
 #toast.show{opacity:1}
 
 /* DRAGGABLE MUSIC BTN */
@@ -85,18 +85,6 @@ body{padding:16px}
 .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .4s}
 .dot.done{background:var(--accent);box-shadow:0 0 8px var(--accent)}
 .dot.active{background:#fff;transform:scale(1.45);box-shadow:0 0 12px rgba(255,255,255,.7)}
-#gamehud{
-  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h)+10px);z-index:210;
-  width:min(92vw,420px);padding:10px 10px 8px;
-  background:rgba(8,8,18,.62);border:1px solid rgba(255,255,255,.16);border-radius:14px;
-  backdrop-filter:blur(8px);box-shadow:0 8px 22px rgba(0,0,0,.35)
-}
-.hud-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px}
-.hud-lvl{font-size:.58rem;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.75)}
-.hud-stats{font-size:.68rem;font-weight:800;color:rgba(255,255,255,.88)}
-.hudbar{height:7px;background:rgba(255,255,255,.1);border-radius:20px;overflow:hidden}
-#xpfill{height:100%;width:0;background:linear-gradient(90deg,#ffe06e,#ff6ec7,#a96eff);transition:width .35s ease}
-#xptxt{margin-top:6px;font-size:.56rem;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.45)}
 
 /* SCREENS */
 .screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;pointer-events:none;z-index:10}
@@ -125,19 +113,6 @@ body{padding:16px}
 .ch-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.25rem,4.5vw,2.05rem);font-weight:700;color:var(--accent);line-height:1.25;text-shadow:0 0 28px color-mix(in srgb,var(--accent) 50%,transparent);padding:0 4px}
 .ch-sub{font-size:clamp(.6rem,1.6vw,.68rem);font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.24);padding:0 8px}
 .narrative{font-size:clamp(.88rem,2.3vw,1.04rem);line-height:2.1;color:rgba(255,255,255,.88);text-align:left;white-space:pre-wrap;width:100%;padding:0 16px 16px}
-.questbox{
-  width:100%;margin:2px 0 10px;padding:12px;border-radius:16px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);text-align:left
-}
-.questhead{font-size:.58rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px}
-.questq{font-size:.85rem;color:rgba(255,255,255,.9);line-height:1.5;margin-bottom:10px}
-.questopts{display:grid;gap:7px}
-.qbtn{
-  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:rgba(255,255,255,.88);
-  border-radius:12px;padding:9px 10px;font-size:.78rem;font-weight:700;cursor:pointer;text-align:left;transition:all .2s
-}
-.qbtn:hover{background:rgba(255,255,255,.13);transform:translateY(-1px)}
-.qbtn.done{border-color:rgba(255,224,110,.55);background:rgba(255,224,110,.14);color:#fff}
 .cursor{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:text-bottom;margin-left:1px;animation:blink .75s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
@@ -192,14 +167,6 @@ body{padding:16px}
 .f-hearts{display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,12px);font-size:clamp(1.2rem,4vw,1.5rem);animation:hpulse 2s ease-in-out infinite}
 .f-msg{font-size:clamp(.88rem,2.3vw,1.04rem);color:rgba(255,255,255,.87);line-height:2.1;text-align:left;white-space:pre-wrap;width:100%;padding:0 16px 16px}
 .f-sign{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,2.5vw,1.18rem);color:#ffe06e;text-align:right;width:100%;opacity:.88}
-.gsum{
-  width:100%;padding:14px;border-radius:16px;background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.13);text-align:left
-}
-.gsum-title{font-size:.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:8px}
-.gsum-stats{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.9)}
-.gsum-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.bdg{padding:5px 9px;border-radius:999px;background:rgba(255,224,110,.16);border:1px solid rgba(255,224,110,.35);font-size:.62rem;font-weight:800;letter-spacing:.6px;color:#fff}
 .rbtn{padding:12px 32px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;font-size:clamp(.78rem,2vw,.85rem);font-weight:700;border:1px solid rgba(255,255,255,.13);border-radius:50px;cursor:pointer;transition:all .22s}
 .rbtn:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);color:rgba(255,255,255,.82)}
 
@@ -214,21 +181,8 @@ body{padding:16px}
 #bnext:hover{box-shadow:0 8px 32px rgba(169,110,255,.88)}
 #bnext.skip{background:linear-gradient(135deg,#a96eff,#6ef0ff)}
 #fwc{position:fixed;inset:0;pointer-events:none;z-index:5}
-#loot{position:fixed;inset:0;pointer-events:none;z-index:170}
-.loot-heart{
-  position:fixed;border:none;background:transparent;color:#ff6ec7;cursor:pointer;
-  filter:drop-shadow(0 3px 8px rgba(0,0,0,.45));pointer-events:all;animation:lootfloat 4.2s ease-in-out forwards
-}
-@keyframes lootfloat{
-  0%{transform:translateY(16px) scale(.7);opacity:0}
-  12%{transform:translateY(0) scale(1);opacity:1}
-  80%{opacity:1}
-  100%{transform:translateY(-18px) scale(1.1);opacity:0}
-}
-
 @media(min-width:700px){:root{--max:680px;--nav-h:80px}.fcat img{width:56px;height:56px}#ctxcat img{width:74px;height:74px}.gphoto img{width:160px;height:215px}.gphoto.couple img{width:230px;height:215px}}
-@media(min-width:900px){#gamehud{left:auto;transform:none;right:14px;bottom:14px;width:270px}#toast{bottom:20px}}
-@media(max-width:460px){.worlds{grid-template-columns:1fr}.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}#gamehud{padding:8px}}
+@media(max-width:460px){.worlds{grid-template-columns:1fr}.t-hearts{gap:5px;font-size:1.1rem}.gphoto img{width:110px;height:150px}.gphoto.couple img{width:165px;height:150px}}
 </style>
 </head>
 <body>
@@ -261,7 +215,6 @@ body{padding:16px}
 <div id="flash"></div>
 <div id="toast"></div>
 <button id="musicbtn" title="Drag me anywhere · Click to toggle music">🎵</button>
-<div id="loot"></div>
 
 <div id="ctxcat">
   <img id="ctxcatimg" src="" alt="" onerror="this.parentElement.style.display='none'">
@@ -275,14 +228,6 @@ body{padding:16px}
 <div id="pbar"><div id="pfill" style="width:0%"></div></div>
 <div id="clabel"></div>
 <div id="dots"></div>
-<div id="gamehud">
-  <div class="hud-top">
-    <div class="hud-lvl" id="hudlvl">LVL 1</div>
-    <div class="hud-stats" id="hudstats">0 ❤️ · 0 🏅</div>
-  </div>
-  <div class="hudbar"><div id="xpfill"></div></div>
-  <div id="xptxt">0 / 40 XP</div>
-</div>
 
 <!-- TITLE -->
 <div class="screen active" id="ts">
@@ -291,7 +236,7 @@ body{padding:16px}
   <p class="t-ded">To my love of life, <strong>Sherry</strong><br>From the one who is forever and utterly yours</p>
   <div class="t-hearts"><span>🌹</span><span>🩵</span><span>💜</span><span>🌸</span><span>💋</span></div>
   <p class="t-meta">10 Chapters &nbsp;·&nbsp; From Teyvat to The Overworld</p>
-  <p class="t-hint">✨ triple-tap title for secret · pick your chapter quest · collect hearts · unlock game badges</p>
+  <p class="t-hint">✨ tap the title three times for a secret</p>
   <button id="continuebtn"></button>
 </div>
 
@@ -301,11 +246,6 @@ body{padding:16px}
     <div class="ch-icon"   id="cicon"></div>
     <div class="ch-title"  id="ctitle"></div>
     <div class="ch-sub"    id="csub"></div>
-    <div class="questbox" id="questbox">
-      <div class="questhead">Sherry Quest</div>
-      <div class="questq" id="questq"></div>
-      <div class="questopts" id="questopts"></div>
-    </div>
     <div class="narrative" id="cnarr"></div>
   </div>
 </div>
@@ -328,11 +268,6 @@ body{padding:16px}
 
     <div class="f-msg"  id="fmsg"></div>
     <div class="f-sign" id="fsign"></div>
-    <div class="gsum" id="gamesummary">
-      <div class="gsum-title">Love Story Game Stats</div>
-      <div class="gsum-stats" id="gsumstats"></div>
-      <div class="gsum-badges" id="gsumbadges"></div>
-    </div>
     <button class="rbtn" onclick="goTo(0)">Read Again &nbsp;🌸</button>
   </div>
 </div>
@@ -375,19 +310,6 @@ const CATS={
   grumpy:'https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif',
   typing:'https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif',
 };
-
-const QUESTS=[
-  {q:'Sherry Quest 1: Choose your starter path in Teyvat.',opts:[{t:'Anemo traveler style 🌬️ (+8 XP)',xp:8,h:1,m:'Adventure Rank increased.'},{t:'Sword-main confidence ⚔️ (+6 XP)',xp:6,h:1,m:'Combat spirit unlocked.'},{t:'Wish-star luck ✨ (+10 XP)',xp:10,h:1,m:'5-star aura activated.'}]},
-  {q:'Sherry Quest 2: Build connection EXP.',opts:[{t:'Reel combo attack 📱 (+7 XP)',xp:7,h:1,m:'Social combo chained.'},{t:'Voice note crit 🎙️ (+9 XP)',xp:9,h:1,m:'Emotional damage dealt.'},{t:'Late-night co-op chat 🌙 (+10 XP)',xp:10,h:2,m:'Bond level up.'}]},
-  {q:'Sherry Quest 3: Enemies-to-lovers dungeon.',opts:[{t:'Playful roast mode 😏 (+7 XP)',xp:7,h:1,m:'Teasing buff applied.'},{t:'Real-talk burst ⚔️ (+9 XP)',xp:9,h:1,m:'Truth burst unlocked.'},{t:'Choose heart over ego 💜 (+11 XP)',xp:11,h:2,m:'Love route selected.'}]},
-  {q:'Sherry Quest 4: Confession boss battle.',opts:[{t:'Critical honesty hit 💋 (+8 XP)',xp:8,h:1,m:'Boss HP melting.'},{t:'Trust shield on 🤍 (+10 XP)',xp:10,h:2,m:'Safety shield activated.'},{t:'Soft-heart finisher 🫂 (+12 XP)',xp:12,h:2,m:'Boss fight cleared.'}]},
-  {q:'Sherry Quest 5: Sacred trust storyline.',opts:[{t:'Gentle pace mastery 🌙 (+9 XP)',xp:9,h:2,m:'Comfort aura up.'},{t:'Tenderness combo chain 🌸 (+10 XP)',xp:10,h:2,m:'Warmth multiplier active.'},{t:'Guardian mode on 🛡️ (+12 XP)',xp:12,h:2,m:'Heart protection unlocked.'}]},
-  {q:'Sherry Quest 6: Storm arc challenge.',opts:[{t:'Stand firm like bedrock 🌩️ (+9 XP)',xp:9,h:1,m:'Resolve increased.'},{t:'Speak bravely to the world 🗣️ (+11 XP)',xp:11,h:2,m:'Courage rank up.'},{t:'Choose love publicly 💍 (+13 XP)',xp:13,h:2,m:'Legendary commitment achieved.'}]},
-  {q:'Sherry Quest 7: Anniversary event.',opts:[{t:'Celebrate tiny loot drops 🎉 (+8 XP)',xp:8,h:1,m:'Joy event unlocked.'},{t:'Gratitude prayer buff 🤲 (+10 XP)',xp:10,h:2,m:'Blessing aura granted.'},{t:'Daily choose-us streak 💜 (+12 XP)',xp:12,h:2,m:'Streak preserved.'}]},
-  {q:'Sherry Quest 8: Fight-fix PvP match.',opts:[{t:'Fast apology reset 🙏 (+9 XP)',xp:9,h:1,m:'Cooldown reduced.'},{t:'Fair-fight ruleset 🫀 (+10 XP)',xp:10,h:2,m:'Respect shield repaired.'},{t:'Return-to-love instant 🌹 (+12 XP)',xp:12,h:2,m:'Reunion animation triggered.'}]},
-  {q:'Sherry Quest 9: Home base expansion.',opts:[{t:'Share every little drop ✉️ (+8 XP)',xp:8,h:1,m:'Daily quest completed.'},{t:'Be calm in chaos 🌊 (+10 XP)',xp:10,h:2,m:'Stability skill unlocked.'},{t:'Dua by name always 🤍 (+12 XP)',xp:12,h:2,m:'Soul-link strengthened.'}]},
-  {q:'Sherry Quest 10: Minecraft forever realm.',opts:[{t:'Build us a cozy base 🏠 (+9 XP)',xp:9,h:1,m:'Home chunk claimed.'},{t:'Survive creepers together 💚 (+11 XP)',xp:11,h:2,m:'Creeper-proof duo unlocked.'},{t:'Diamond-tier forever promise 💎 (+13 XP)',xp:13,h:2,m:'Forever world generated.'}]},
-];
 
 const THEMES=[
   ['💜','🌹','🌸','✨','💫','🎮'],
@@ -641,6 +563,8 @@ Meri Jaan.
 
 You gave me one too. And I did not even know I had been missing it until you walked into my life through a Genshin world one afternoon and never really left.
 
+And now somehow our love lives in Minecraft too, in every little base we build, every night run, every chaotic creeper moment we survive together.
+
 You are my calm and my chaos. My home and my greatest adventure. The person I want to call first when anything happens. The person I pray for by name.
 
 If Allah wills it, you will be mine in dunya. And I will find you again in jannah. And in every life in between if there are any. Because one life with you will never feel like enough.
@@ -735,139 +659,20 @@ function closeLB(){document.getElementById('lightbox').classList.remove('show');
 // ─── ENGINE ───
 const TOTAL=CH.length;
 let state=0,tTimer=null,tDone=false;
-let loveXP=0,loveHearts=0,collectedOrbs=0;
-let chapterChoices={};
-const badges=new Set();
-let lootIv=null;
-const XP_PER_LEVEL=40;
-const GAME_KEY='ourStory_game';
 
 const gi=id=>document.getElementById(id);
 const $bg=gi('bg'),$pf=gi('pfill'),$lbl=gi('clabel');
 const $dots=gi('dots'),$bnext=gi('bnext'),$bprev=gi('bprev');
 const $ctxcat=gi('ctxcat'),$ctximg=gi('ctxcatimg');
-const $questq=gi('questq'),$questopts=gi('questopts');
-const $hudlvl=gi('hudlvl'),$hudstats=gi('hudstats');
-const $xpfill=gi('xpfill'),$xptxt=gi('xptxt');
-const $gsumstats=gi('gsumstats'),$gsumbadges=gi('gsumbadges');
-const $loot=gi('loot');
 
 for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot';d.id='d'+i;$dots.appendChild(d);}
 
 window.addEventListener('load',()=>{const iv=gi('intro');setTimeout(()=>{iv.classList.add('fade');setTimeout(()=>iv.remove(),650);},2400);});
-
-function saveGame(){
-  localStorage.setItem(GAME_KEY,JSON.stringify({
-    loveXP,loveHearts,collectedOrbs,chapterChoices:[...Object.entries(chapterChoices)],badges:[...badges]
-  }));
-}
-function loadGame(){
-  try{
-    const raw=localStorage.getItem(GAME_KEY);
-    if(!raw)return;
-    const g=JSON.parse(raw);
-    loveXP=Number(g.loveXP)||0;
-    loveHearts=Number(g.loveHearts)||0;
-    collectedOrbs=Number(g.collectedOrbs)||0;
-    chapterChoices=Object.fromEntries(Array.isArray(g.chapterChoices)?g.chapterChoices:[]);
-    (Array.isArray(g.badges)?g.badges:[]).forEach(b=>badges.add(b));
-  }catch(_){}
-}
-function grantBadge(name){
-  if(badges.has(name))return;
-  badges.add(name);
-  showToast(`Badge unlocked: ${name} 🏅`);
-}
-function levelParts(){
-  const lvl=Math.floor(loveXP/XP_PER_LEVEL)+1;
-  const inLvl=loveXP%XP_PER_LEVEL;
-  return{lvl,inLvl,next:XP_PER_LEVEL};
-}
-function updateHud(){
-  const lv=levelParts();
-  $hudlvl.textContent=`AR ${lv.lvl} · LOVE`;
-  $hudstats.textContent=`${loveHearts} ❤️ · ${badges.size} 🏅`;
-  $xpfill.style.width=(lv.inLvl/lv.next*100)+'%';
-  $xptxt.textContent=`${lv.inLvl} / ${lv.next} XP`;
-}
-function renderQuest(chIdx){
-  const q=QUESTS[chIdx%QUESTS.length];
-  if(!q)return;
-  $questq.textContent=q.q;
-  $questopts.innerHTML='';
-  const picked=chapterChoices[chIdx];
-  q.opts.forEach((opt,i)=>{
-    const b=document.createElement('button');
-    b.className='qbtn'+(picked===i?' done':'');
-    b.textContent=opt.t;
-    b.disabled=picked!==undefined;
-    if(picked!==undefined&&picked!==i)b.style.opacity='.5';
-    b.onclick=()=>chooseQuest(chIdx,i,opt);
-    $questopts.appendChild(b);
-  });
-}
-function chooseQuest(chIdx,optIdx,opt){
-  if(chapterChoices[chIdx]!==undefined)return;
-  chapterChoices[chIdx]=optIdx;
-  loveXP+=opt.xp;
-  loveHearts+=opt.h;
-  grantBadge('Teyvat Traveler');
-  const done=Object.keys(chapterChoices).length;
-  if(done>=5)grantBadge('Overworld Builder');
-  if(done>=TOTAL)grantBadge('Diamond Duo');
-  if(opt.xp>=12)grantBadge('Mythic Choice');
-  renderQuest(chIdx);
-  updateHud();
-  saveGame();
-  showToast(opt.m);
-}
-function renderSummary(){
-  const done=Object.keys(chapterChoices).length;
-  const lv=levelParts();
-  $gsumstats.innerHTML=
-    `Adventure Rank: <strong>${lv.lvl}</strong><br>`+
-    `Heart crystals collected: <strong>${loveHearts}</strong><br>`+
-    `Story quests completed: <strong>${done}/${TOTAL}</strong><br>`+
-    `Floating loot caught: <strong>${collectedOrbs}</strong>`;
-  $gsumbadges.innerHTML='';
-  [...badges].sort().forEach(b=>{
-    const el=document.createElement('span');
-    el.className='bdg';
-    el.textContent=b;
-    $gsumbadges.appendChild(el);
-  });
-}
-function spawnLootHeart(){
-  if(state===0)return;
-  const b=document.createElement('button');
-  b.type='button';
-  b.className='loot-heart';
-  b.textContent='💖';
-  const size=Math.random()*16+18;
-  const x=Math.random()*(window.innerWidth-40)+10;
-  const y=Math.random()*(window.innerHeight-190)+70;
-  b.style.left=x+'px';b.style.top=y+'px';b.style.fontSize=size+'px';
-  b.onclick=()=>{
-    if(!b.parentElement)return;
-    b.remove();
-    loveHearts+=1;loveXP+=4;collectedOrbs+=1;
-    if(collectedOrbs>=10)grantBadge('Crystal Collector');
-    updateHud();saveGame();
-    showToast('Loot collected! +4 XP');
-  };
-  $loot.appendChild(b);
-  setTimeout(()=>b.remove(),4200);
-}
-function startLoot(){if(lootIv)return;lootIv=setInterval(spawnLootHeart,2800);}
-function stopLoot(){clearInterval(lootIv);lootIv=null;$loot.innerHTML='';}
-
-loadGame();
 const saved=parseInt(localStorage.getItem('ourStory_ch')||'0');
 if(saved>0&&saved<=TOTAL){const cb=gi('continuebtn');cb.style.display='block';cb.textContent=`Continue: Chapter ${saved}`;cb.onclick=()=>goTo(saved);}
 
 let taps=0,tapTimer=null;
-gi('tHead').addEventListener('click',()=>{taps++;clearTimeout(tapTimer);if(taps>=3){taps=0;gi('eggmodal').classList.add('show');grantBadge('Hidden Chest Hunter');updateHud();saveGame();}else tapTimer=setTimeout(()=>{taps=0;},700);});
-gi('tHead').addEventListener('click',()=>{if(state===0&&Math.random()>.65)showToast('Birthday Event: Lucky pull vibes ✨');});
+gi('tHead').addEventListener('click',()=>{taps++;clearTimeout(tapTimer);if(taps>=3){taps=0;gi('eggmodal').classList.add('show');}else tapTimer=setTimeout(()=>{taps=0;},700);});
 function closeEgg(){gi('eggmodal').classList.remove('show');}
 function eggOutside(e){if(e.target===gi('eggmodal'))closeEgg();}
 
@@ -909,7 +714,6 @@ function syncUI(){
   for(let i=0;i<TOTAL;i++){const d=gi('d'+i);if(!d)continue;d.className='dot'+(i<state?' done':'')+(i===state-1?' active':'');}
   $bprev.style.display=state>0?'block':'none';
   $bnext.style.display=state<=TOTAL?'block':'none';
-  updateHud();
 }
 function goTo(s){
   state=s;if(tTimer){clearInterval(tTimer);tTimer=null;}
@@ -918,7 +722,7 @@ function goTo(s){
     setScreen('ts');$bg.style.background='linear-gradient(135deg,#0d0d1a,#1a1040)';
     document.documentElement.style.setProperty('--accent','#a96eff');
     $lbl.textContent='';$bnext.textContent='Start Our Story \u00a0🌸';$bnext.classList.remove('skip');
-    setCtxCat(null);stopFW();spawnEmojis(THEMES[0]);stopLoot();
+    setCtxCat(null);stopFW();spawnEmojis(THEMES[0]);
   } else if(state>=1&&state<=TOTAL){
     const ch=CH[state-1];
     document.documentElement.style.setProperty('--accent',ch.accent);
@@ -926,15 +730,15 @@ function goTo(s){
     $lbl.textContent=ch.label;
     const ci=gi('cicon');ci.textContent=ch.icon;ci.style.animation='none';void ci.offsetWidth;ci.style.animation='';
     gi('ctitle').textContent=ch.title;gi('csub').textContent=ch.sub;gi('chscroll').scrollTop=0;
-    setScreen('cs');setCtxCat(ch.cat);spawnEmojis(THEMES[state]);renderQuest(state-1);typeIt(ch.text);startLoot();
+    setScreen('cs');setCtxCat(ch.cat);spawnEmojis(THEMES[state]);typeIt(ch.text);
   } else {
     gi('fmsg').textContent=FINALE;gi('fsign').textContent=SIGN;
     $bg.style.background='linear-gradient(135deg,#0d0820,#1a0530)';
     document.documentElement.style.setProperty('--accent','#ff6ec7');
     $lbl.textContent='The End · A New Beginning 🌸';
-    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.nyan);spawnEmojis(THEMES[11]);startFW();startLoot();renderSummary();
+    gi('fscroll').scrollTop=0;setScreen('fs');setCtxCat(CATS.nyan);spawnEmojis(THEMES[11]);startFW();
   }
-  syncUI();saveGame();
+  syncUI();
 }
 function typeIt(txt){
   tDone=false;$bnext.textContent='Skip';$bnext.classList.add('skip');
